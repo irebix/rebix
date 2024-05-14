@@ -1,0 +1,11 @@
+{
+    "isFirstPlay": false,
+    "GameMode": 0,
+    "isMusicOn": true,
+    "isSFXOn": true,
+    "isRestartGame": false,
+    "GameCount_PVE": 0,
+    "WinCount_PVE": 0,
+    "GameCount_PVP": 0,
+    "WinCount_PVP": 0
+}
