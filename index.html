@@ -239,7 +239,7 @@
     });
 
     // 悬停显示hover图片 
-        document.querySelectorAll('.project-row').forEach(row => {
+    document.querySelectorAll('.project-row').forEach(row => {
         const mainImg = row.querySelector('.main-img');
         const hoverImg = row.querySelector('.hover-img');
         const description = row.querySelector('.project-description');
@@ -252,19 +252,25 @@
             hoverImg.style.left = `${mainImgRect.left - row.getBoundingClientRect().left}px`;
         };
 
-        const showHoverImg = () => {
+        const onImageLoad = () => {
+            setHoverImgSize();
+            mainImg.removeEventListener('load', onImageLoad);
+        };
+
+        if (mainImg.complete) {
+            setHoverImgSize();
+        } else {
+            mainImg.addEventListener('load', onImageLoad);
+        }
+
+        row.addEventListener('mouseenter', () => {
             setHoverImgSize();
             hoverImg.style.opacity = 1;
-        };
+        });
 
-        const hideHoverImg = () => {
+        row.addEventListener('mouseleave', () => {
             hoverImg.style.opacity = 0;
-        };
-
-        mainImg.addEventListener('mouseenter', showHoverImg);
-        mainImg.addEventListener('mouseleave', hideHoverImg);
-        description.addEventListener('mouseenter', showHoverImg);
-        description.addEventListener('mouseleave', hideHoverImg);
+        });
 
         // 在页面加载和窗口大小改变时设置悬停图片的尺寸
         window.addEventListener('load', setHoverImgSize);
