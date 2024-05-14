@@ -170,19 +170,22 @@ h2:not(+ .h2-tagline) {
 .project-row .project-description {
     width: 45%; /* 调整描述宽度，留出间隙 */
     padding: 10px; /* 添加内边距 */
+    color: inherit; /* 保持描述文字颜色不变 */
+    text-align: left; /* 默认情况下文本靠左对齐 */
+    
+}
+#right-nav a:hover {
+    color: #555; /* 悬停时的颜色，可以根据需要调整 */
 }
 
 .project-description p:first-child {
     font-size: 35px; /* 第一行字体较大 */
+    font-weight: bold;
     margin-bottom: 10px; /* 增加与第二行的间距 */
 }
 
 .project-description p:last-child {
     font-size: 20px; /* 第二行字体较小 */
-}
-
-.project-row .project-description {
-    text-align: left; /* 默认情况下文本靠左对齐 */
 }
 
 .project-row.reverse .project-description {
@@ -195,9 +198,33 @@ h2:not(+ .h2-tagline) {
     justify-content: space-between;
     margin-bottom: 20px; /* 添加适当的间距 */
     font-size: 20px;
+    padding: 0 2%; /* 添加左右内边距，使图片向中间拓宽一点点 */
+    position: relative;
 }
+
+.main-img {
+    width: 48%; /* 调整图片宽度 */
+    height: auto;
+    display: block;
+}
+
+.hover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; 
+    object-fit: cover; /* 确保图片覆盖容器 */
+}
+
+.project-row:hover .hover-img {
+    opacity: 1;
+}
+
 .project-row a {
-    width: 50%; /* 设置链接宽度为容器的50% */
+    width: 48%; /* 设置链接宽度为容器的48% */
     display: block; /* 确保链接是块级元素 */
     margin: 0; /* 移除外边距 */
     padding: 0; /* 移除内边距 */
@@ -216,6 +243,44 @@ h2:not(+ .h2-tagline) {
 .project-row.reverse {
     flex-direction: row-reverse; /* 反转顺序 */
 }
+
+/* 使用 @media 查询实现响应式设计 */
+@media (max-aspect-ratio: 4/3) {
+    .project-container {
+        display: block;
+        flex-direction: column; /* 使项目竖直排列 */
+        align-items: center; /* 居中对齐 */
+    }
+
+    .project-row {
+        flex-direction: column; /* 使项目竖直排列 */
+        align-items: center; /* 居中对齐 */
+        margin-bottom: 40px; /* 添加适当的间距 */
+        width: 100%; /* 调整项目宽度 */
+        padding: 0; /* 移除内边距 */
+    }
+
+    .project-row .project-description {
+        text-align: center; /* 文本居中对齐 */
+    }
+
+    .main-img {
+        width: 100%; /* 调整图片宽度 */
+        margin-bottom: 10px; /* 添加图片与描述之间的间距 */
+    }
+
+    .project-row a {
+        width: 100%; /* 设置链接宽度为容器的100% */
+    }
+    .project-row.reverse {
+        flex-direction: column; /* 使项目竖直排列 */
+    }
+    .project-row.reverse .project-description {
+        text-align: center; /* 在reverse类下文本靠右对齐 */
+    }
+
+}
+
 .video-container {
     text-align: center; /* 使容器内的内容居中 */
     padding: 5%; /* 添加适当的内边距 */
