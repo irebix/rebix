@@ -40,6 +40,7 @@ h1 {
     font-size: 70px;
     letter-spacing: 4px; /* 增加字间距 */
     z-index: 3;
+    text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
 }
 
 h2 {
@@ -69,6 +70,8 @@ h2:not(+ .h2-tagline) {
     text-align: center;
     font-size: 25px;
     z-index: 3;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+
 }
 
 @keyframes floatArrow {
@@ -93,6 +96,7 @@ h2:not(+ .h2-tagline) {
     z-index: 3; /* 确保在最上层显示 */
     animation: floatArrow 2s ease-in-out infinite; /* 应用动画 */
     cursor:pointer;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* 添加阴影效果 */
 
 }
 
@@ -105,6 +109,7 @@ h2:not(+ .h2-tagline) {
     z-index: 3; /* 确保导航栏在最上层 */
     font-size: 18px; 
     cursor: pointer;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
 }
 
 #right-nav a {
@@ -137,6 +142,8 @@ h2:not(+ .h2-tagline) {
     font-size: 25px;
     z-index: 4;
     cursor: pointer;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+
 }
 
 #left-nav ul {

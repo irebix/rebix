@@ -1,120 +1,119 @@
 <!DOCTYPE html>
 <html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <title>马克笔的作品集</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <nav id="left-nav">
-        <ul>
-            <li><a id="refresh-page" onclick="window.location.reload(); return false;">马克笔</a></li>
-        </ul>
-    </nav>
-    <nav id="right-nav">
-        <ul>
-            <li><a class="scroll-link" data-target="project">游戏项目</a></li>
-            <li><a class="scroll-link" data-target="concept">概念设计</a></li>
-            <li><a class="scroll-link" data-target="illustration">插画设计</a></li>
-            <li><a class="scroll-link" data-target="tools">工具开发</a></li>
-        </ul>
-    </nav>
-
-    <header>
-        <h1>傅宇帆</h1>
-        <div id="tagline">设计 · 编程 · 插画</div>
-        <div id="down-arrow"></div>
-        <img src="img/mainimg.jpg" alt="Main Image" id="fullscreen-image">
-    </header>
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>马克笔的作品集</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <link rel="stylesheet" href="styles.css">
+        <link rel="preload" href="img/mainimg.jpg" as="image">
+    </head>
+    <body>
+        <nav id="left-nav">
+            <ul>
+                <li><a id="refresh-page" onclick="window.location.reload(); return false;">马克笔</a></li>
+            </ul>
+        </nav>
+        <nav id="right-nav">
+            <ul>
+                <li><a class="scroll-link" data-target="project">游戏项目</a></li>
+                <li><a class="scroll-link" data-target="concept">概念设计</a></li>
+                <li><a class="scroll-link" data-target="illustration">插画设计</a></li>
+                <li><a class="scroll-link" data-target="tools">工具开发</a></li>
+            </ul>
+        </nav>
     
-
-    <section id="project">
-        <h2>游戏项目</h2>
-        <div class="project-container">
-            <div class="project-row">
-                <a href="../elementduel/index.html"><img src="img/e1.jpg" alt="Project 1"></a>
-                <div class="project-description">
-                    <p>元素对决</p>
-                    <p>独立开发，基于Unity3D的跨平台联机对战卡牌游戏</p>
-                </div>
-            </div>
-            <div class="project-row reverse">
-                <a href="../brawlstars/index.html"><img src="img/bs1.jpg" alt="Project 2"></a>
-                <div class="project-description">
-                    <p>荒野乱斗</p>
-                    <p>市场美宣图，漫画</p>
-                </div>
-            </div>
-            <div class="project-row">
-                <a href="../journey/index.html"><img src="img/j1.jpg" alt="Project 3"></a>
-                <div class="project-description">
-                    <p>代号：旅程</p>
-                    <p>概念设计，插画设计，资产输出，以及引擎工具开发</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="concept">
-        <h2>概念设计</h2>
-        <div class="h2-tagline">查看更多</div>
-        <div class="img-gallery">
-            <!-- 每行两张图片 -->
-            <a class="two-per-row"><img src="img/bs2.jpg" alt="Concept Art 1"></a>
-            <a class="two-per-row"><img src="img/e2.jpg" alt="Concept Art 2"></a>         
-            <!-- 每行四张图片 -->
-            <a  class="four-per-row"><img src="img/j5.jpg" alt="New Concept Art 1"></a>
-            <a  class="four-per-row"><img src="img/j1.jpg" alt="New Concept Art 2"></a>
-            <a  class="four-per-row"><img src="img/e3.jpg" alt="New Concept Art 3"></a>
-            <a  class="four-per-row"><img src="img/m1.jpg" alt="New Concept Art 4"></a>
-        </div>
-    </section>
+        <header>
+            <h1>傅宇帆</h1>
+            <div id="tagline">设计 · 编程 · 插画</div>
+            <div id="down-arrow"></div>
+            <img src="img/mainimg.jpg" alt="Main Image" id="fullscreen-image">
+        </header>
     
-    <section id="illustration">
-        <h2>插画设计</h2>
-        <div class="h2-tagline">查看更多</div>
-        <div class="img-gallery">
-            <a class="four-per-row"><img src="img/ji1.jpg" alt="Concept Art 1"></a>
-            <a class="four-per-row"><img src="img/ji2.jpg" alt="Concept Art 2"></a>
-            <a  class="four-per-row"><img src="img/ji3.jpg" alt="New Concept Art 1"></a>
-            <a  class="four-per-row"><img src="img/ji5.jpg" alt="New Concept Art 2"></a>
-            
-            <a  class="four-per-row"><img src="img/bs7.jpg" alt="New Concept Art 3"></a>
-            <a  class="four-per-row"><img src="img/bs10.jpg" alt="New Concept Art 4"></a>
-            <a  class="four-per-row"><img src="img/bs3.jpg" alt="New Concept Art 4"></a>
-            <a  class="four-per-row"><img src="img/bs9.jpg" alt="New Concept Art 4"></a>
-        </div>
-    </section>
-
-    <section id="tools">
-        <h2>工具开发</h2>
-        <div class="video-container">
-            <video controls src="videos/工具演示.mp4" alt="Tool Demo Video">
-                Your browser does not support the video tag.
-            </video>
-            <div class="tool-description">
-                <p>PS与Unity实时更新武器贴图＆一键切换地图</p>
-                <p>为方便检查武器在实际游戏中的效果，包括渲染分辨率、动作、背景契合度等要素，为目的制作的脚本</p>
-                <p>主要功能：</p>
-                <p>1. PS一键保存后，Unity内同步显示修改效果<br>2. 一键切换生态地图，方便对照武器在各生态下效果。<br></p>
+        <section id="project">
+            <h2>游戏项目</h2>
+            <div class="project-container">
+                <div class="project-row">
+                    <a href="../elementduel/index.html"><img src="img/e1.jpg" alt="Project 1" loading="lazy"></a>
+                    <div class="project-description">
+                        <p>元素对决</p>
+                        <p>独立开发，基于Unity3D的跨平台联机对战卡牌游戏</p>
+                    </div>
+                </div>
+                <div class="project-row reverse">
+                    <a href="../brawlstars/index.html"><img src="img/bs1.jpg" alt="Project 2" loading="lazy"></a>
+                    <div class="project-description">
+                        <p>荒野乱斗</p>
+                        <p>市场美宣图，漫画</p>
+                    </div>
+                </div>
+                <div class="project-row">
+                    <a href="../journey/index.html"><img src="img/j1.jpg" alt="Project 3" loading="lazy"></a>
+                    <div class="project-description">
+                        <p>代号：旅程</p>
+                        <p>概念设计，插画设计，资产输出，以及引擎工具开发</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section id="concept">
+            <h2>概念设计</h2>
+            <div class="h2-tagline">查看更多</div>
+            <div class="img-gallery">
+                <a class="two-per-row"><img src="img/bs2.jpg" alt="Concept Art 1" loading="lazy"></a>
+                <a class="two-per-row"><img src="img/e2.jpg" alt="Concept Art 2" loading="lazy"></a>         
+                <a class="four-per-row"><img src="img/j5.jpg" alt="New Concept Art 1" loading="lazy"></a>
+                <a class="four-per-row"><img src="img/j1.jpg" alt="New Concept Art 2" loading="lazy"></a>
+                <a class="four-per-row"><img src="img/e3.jpg" alt="New Concept Art 3" loading="lazy"></a>
+                <a class="four-per-row"><img src="img/m1.jpg" alt="New Concept Art 4" loading="lazy"></a>
+            </div>
+        </section>
+    
+        <section id="illustration">
+            <h2>插画设计</h2>
+            <div class="h2-tagline">查看更多</div>
+            <div class="img-gallery">
+                <a class="four-per-row"><img src="img/ji1.jpg" alt="Concept Art 1" loading="lazy"></a>
+                <a class="four-per-row"><img src="img/ji2.jpg" alt="Concept Art 2" loading="lazy"></a>
+                <a class="four-per-row"><img src="img/ji3.jpg" alt="New Concept Art 1" loading="lazy"></a>
+                <a class="four-per-row"><img src="img/ji5.jpg" alt="New Concept Art 2" loading="lazy"></a>
+                <a class="four-per-row"><img src="img/bs7.jpg" alt="New Concept Art 3" loading="lazy"></a>
+                <a class="four-per-row"><img src="img/bs10.jpg" alt="New Concept Art 4" loading="lazy"></a>
+                <a class="four-per-row"><img src="img/bs3.jpg" alt="New Concept Art 4" loading="lazy"></a>
+                <a class="four-per-row"><img src="img/bs9.jpg" alt="New Concept Art 4" loading="lazy"></a>
+            </div>
+        </section>
+    
+        <section id="tools">
+            <h2>工具开发</h2>
+            <div class="video-container">
+                <video controls src="videos/工具演示.mp4" alt="Tool Demo Video" loading="lazy">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="tool-description">
+                    <p>PS与Unity实时更新武器贴图＆一键切换地图</p>
+                    <p>为方便检查武器在实际游戏中的效果，包括渲染分辨率、动作、背景契合度等要素，为目的制作的脚本</p>
+                    <p>主要功能：</p>
+                    <p>1. PS一键保存后，Unity内同步显示修改效果<br>2. 一键切换生态地图，方便对照武器在各生态下效果。<br></p>
+                </div>
+            </div>
+        </section>
+    
+        <!-- 图片预览遮罩层 -->
+        <div id="image-preview" style="display: none;">
+            <div id="preview-container">
+                <img id="preview-image" src="" alt="Image Preview">
+                <div id="left-arrow" class="arrow">&lt;</div>
+                <div id="right-arrow" class="arrow">&gt;</div>
             </div>
         </div>
-    </section>
-
-    <!-- 图片预览遮罩层 -->
-    <div id="image-preview" style="display: none;">
-        <div id="preview-container">
-            <img id="preview-image" src="" alt="Image Preview">
-            <div id="left-arrow" class="arrow">&lt;</div>
-            <div id="right-arrow" class="arrow">&gt;</div>
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2024 Rebix</p>
-    </footer>
-</body>
+    
+        <footer>
+            <p>© 2024 Rebix</p>
+        </footer>
+    </body>
 <script>
     document.querySelectorAll('.img-gallery img:not(.no-preview)').forEach((img, index, array) => {
     img.addEventListener('click', () => {
