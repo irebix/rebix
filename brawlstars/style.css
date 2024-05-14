@@ -42,26 +42,7 @@ h1 {
 .image-gallery img:hover {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
-@media (max-aspect-ratio: 4/3) {
-    #right-nav {
-        color: white;
-        position: absolute;
-        top: 20px;
-        right: 0; /* 页面宽度的15% */
-        padding: 10px;
-        z-index: 3; /* 确保导航栏在最上层 */
-        font-size: 18px; 
-        font-family: Arial, sans-serif; /* 与 h1 相同的字体类型 */
-    }
-    .image-gallery {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 10px;
-    }
 
-    .image-gallery img {
-        width: 100%; /* 调整宽度以适应竖屏显示 */
-    }
-}
 /* 导航栏样式 */
 #right-nav, #left-nav {
     position: absolute;
@@ -99,6 +80,24 @@ h1 {
 #right-nav ul li, #left-nav ul li {
     display: inline;
     margin: 0 10px;
+}
+
+@media (max-aspect-ratio: 4/3) {
+    #right-nav {
+        right: calc(100% * 0);
+    }
+    
+    #left-nav {
+        left: calc(100% * 0);
+    }
+    .image-gallery {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    .image-gallery img {
+        width: 100%; /* 调整宽度以适应竖屏显示 */
+    }
 }
 
 /* 页脚样式 */

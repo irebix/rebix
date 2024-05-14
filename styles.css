@@ -31,6 +31,17 @@ header {
     border-radius: 10px;
 }
 
+.h2-tagline a {
+    color: inherit; /* 继承父元素的颜色 */
+    text-decoration: none; /* 去除下划线 */
+}
+
+.h2-tagline a:hover {
+    color: #555; /* 悬停时的颜色，可以根据需要调整 */
+    text-decoration: none; /* 悬停时也去除下划线 */
+    cursor: pointer;
+}
+
 h1 {
     position: absolute;
     color: white;
@@ -284,7 +295,7 @@ h2:not(+ .h2-tagline) {
 .video-container {
     text-align: center; /* 使容器内的内容居中 */
     padding: 5%; /* 添加适当的内边距 */
-    margin-bottom: 20px; /* 在容器底部添加间距 */
+    margin-bottom: 35px; /* 在容器底部添加间距 */
 }
 
 .video-container video {
@@ -299,8 +310,9 @@ h2:not(+ .h2-tagline) {
 }
 
 .tool-description p:first-child {
-    font-size: 25px; /* 第一行字体较大 */
-    margin-bottom: 10px; /* 增加与第二行的间距 */
+    font-size: 35px; /* 第一行字体较大 */
+    margin-bottom: 50px; /* 增加与第二行的间距 */
+    font-weight: bold;
 }
 
 .tool-description p:last-child {
