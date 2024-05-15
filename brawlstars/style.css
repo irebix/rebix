@@ -1,5 +1,10 @@
 /* 基础样式 */
-/* todo:h1位置适配 */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* 禁止水平滚动 */
+}
+
 body {
     display: flex;
     flex-direction: column;
