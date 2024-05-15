@@ -93,22 +93,32 @@
 
         #imageContainer {
             padding: 0 0; /* 移除两边的边框 */
-            height: 30vh; /* 占据视窗的30% */
+            height: auto; 
             width: 65%;
 			display: grid; /* 使用grid布局 */
 			grid-template-columns: repeat(2, 1fr); /* 定义两列 */
 			gap: 10px; /* 图片之间的间距 */
+            padding-bottom: 5vh;
 			align-items: center;
         }
 
 		#imageContainer img {
-        width: 100%;
-        max-width: 100%; /* 确保图片在网格中占满 */
-        margin-bottom: 0.1vh;
+            width: 100%;
+            max-width: 100%; /* 确保图片在网格中占满 */
+            margin-bottom: 0.1vh;
     	}
 		#imageContainer img:first-child {
-        grid-column: span 2; /* 第一张图片占据两列 */
+            grid-column: span 2; /* 第一张图片占据两列 */
     	}
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background: #000;
+            color: rgb(200, 200, 200);
+            position: relative;
+            bottom: 0;
+        }
 
         /* 导航栏样式 */
         #right-nav, #left-nav {
@@ -190,7 +200,7 @@
 			#imageContainer {
 				gap: 5px;
 				width: 100%
-			}
+			}                     
             div#gameContainer {
             background: transparent !important;
             position: relative;
@@ -332,6 +342,9 @@
             <img src="../img/e6.jpg" alt="Concept Art 6" loading="lazy">
             <img src="../img/e7.jpg" alt="Concept Art 7" loading="lazy">
         </div>
+        <footer>
+            <p>© 2024 Rebix</p>
+        </footer>
     </div>
 </body>
 <script>
