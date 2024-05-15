@@ -172,6 +172,10 @@ h2:not(+ .h2-tagline) {
     color: #555;
 }
 
+#project {
+    padding-top: 10%; /* 将顶部的 padding 缩短 10% */
+}
+
 .project-container {
     margin-top: 5%;
     padding: 0; /* 内边距为0，确保左右两边顶格 */
