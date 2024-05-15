@@ -118,7 +118,7 @@
             z-index: 3;
             font-size: 18px;
             cursor: pointer;
-            color: rgb(255, 255, 255);
+            color: rgb(200, 200, 200);
             text-decoration: none;
         }
 
@@ -135,8 +135,35 @@
             text-decoration: none;
         }
 
-        #right-nav a:hover, #left-nav a:hover {
+        #left-nav a:hover {
             color: #555;
+        }
+        
+        #right-nav a {
+            position: relative; /* 确保伪元素相对于链接进行定位 */
+            text-decoration: none; /* 移除默认的下划线 */
+            color: inherit; /* 保持原有的文字颜色 */
+        }
+
+        #right-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; /* 调整下划线的位置 */
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: currentColor; /* 使用当前文字颜色 */
+            border-radius: 2px; /* 可选：添加圆角效果 */
+            transition: transform 0.3s ease; /* 添加过渡效果 */
+            transform: scaleX(0); /* 初始状态下隐藏下划线 */
+        }
+
+        #right-nav a:hover::after {
+            transform: scaleX(1); /* 悬停时显示下划线 */
+        }
+
+        #right-nav a.active::after {
+            transform: scaleX(1); /* 选中态下显示下划线 */
         }
 
         #right-nav ul, #left-nav ul {
@@ -164,6 +191,16 @@
 				gap: 5px;
 				width: 100%
 			}
+            div#gameContainer {
+            background: transparent !important;
+            position: relative;
+            height: 70vh; /* 占据视窗的65% */
+            width: 100%;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            margin-top: 15vh; /* 为导航栏腾出空间 */
+            }
 		}
 
     </style>
@@ -180,7 +217,7 @@
             <ul>
                 <li><a class="scroll-link" href="/concept/index.html">概念设计</a></li>
                 <li><a class="scroll-link" href="/illustration/index.html">插画设计</a></li>
-                <li><a class="scroll-link" href="/elementduel/index.html">独立游戏</a></li>
+                <li><a class="scroll-link active" href="/elementduel/index.html">独立游戏</a></li>
             </ul>
         </nav>
 		
