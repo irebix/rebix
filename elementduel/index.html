@@ -17,7 +17,9 @@
             display: flex;
             flex-direction: column;
         }
-
+        .hidden {
+            display: none !important;
+        }
         #container {
             overflow-y: auto; /* 使整个容器可滚动 */
             width: 100%;
@@ -202,16 +204,18 @@
 				width: 100%
 			}                     
             div#gameContainer {
-            background: transparent !important;
-            position: relative;
-            height: 70vh; /* 占据视窗的65% */
-            width: 100%;
-            display: flex;
-            justify-content: center; /* 水平居中 */
-            align-items: center; /* 垂直居中 */
-            margin-top: 15vh; /* 为导航栏腾出空间 */
+                background: transparent !important;
+                position: relative;
+                height: 70vh; /* 占据视窗的65% */
+                width: 100%;
+                display: flex;
+                justify-content: center; /* 水平居中 */
+                align-items: center; /* 垂直居中 */
+                margin-top: 15vh; /* 为导航栏腾出空间 */
             }
 		}
+        @media (max-width: 800px), (max-height: 800px) {
+        }
 
     </style>
 </head>
@@ -252,6 +256,7 @@
                     scaleToFit = true;
                 }
                 var progressBarText = null; // 初始化为 null，确保只有一个元素被创建
+                var progressBarMessage = null; // 初始化为 null，确保只有一个元素被创建
 
                 function progressHandler(progress) {
                     var percent = (progress * 100).toFixed(2) + '%'; // 保留两位小数
@@ -274,12 +279,32 @@
                         canvas.parentElement.appendChild(progressBarText);
                     }
 
+                    if (!progressBarMessage) {
+                        progressBarMessage = document.createElement('div');
+                        progressBarMessage.style.position = 'absolute';
+                        progressBarMessage.style.top = 'calc(50% + 1rem)'; // 调整位置，使其位于进度条下方
+                        progressBarMessage.style.left = '50%';
+                        progressBarMessage.style.transform = 'translateX(-50%)';
+                        progressBarMessage.style.color = 'white';
+                        progressBarMessage.style.fontSize = '1rem'; // 设置字体大小
+                        progressBarMessage.style.textAlign = 'center';
+                        progressBarMessage.style.width = '100%';
+                        progressBarMessage.style.height = '1.5rem'; // 调整高度以适应字体大小
+                        progressBarMessage.style.lineHeight = '1.5rem';
+                        progressBarMessage.style.zIndex = '1';
+                        progressBarMessage.textContent = '正在进入元素世界...（tips：移动端横屏效果更佳）';
+                        canvas.parentElement.appendChild(progressBarMessage);
+                    }
+
                     progressBarText.textContent = percent;
 
                     if (progress >= 1) {
-                        // 当进度完成时，移除百分比显示
+                        // 当进度完成时，移除百分比显示和提示信息
                         progressBarText.parentNode.removeChild(progressBarText);
                         progressBarText = null; // 重置变量，确保下次可以重新创建
+
+                        progressBarMessage.parentNode.removeChild(progressBarMessage);
+                        progressBarMessage = null; // 重置变量，确保下次可以重新创建
                     }
                 }
 
@@ -288,28 +313,38 @@
                     var w;
                     var h;
 
-                    if (scaleToFit) {
-                        w = window.innerWidth;
-                        h = window.innerHeight * 0.70; // 占据视窗的65%
+                    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                    var isLandscape = window.innerWidth > window.innerHeight;
 
-                        var r = 1080 / 1920;
-
-                        if (w * r > h) {
-                            w = Math.min(w, Math.ceil(h / r));
-                        }
-                        h = Math.floor(w * r);
+                    if (isMobile && isLandscape) {
+                        h = window.innerHeight * 1; // 占据视窗的100%
+                        w = h * (16 / 9); // 保持16:9的宽高比
                     } else {
-                        w = 1920;
-                        h = 1080;
+                        if (scaleToFit) {
+                            w = window.innerWidth;
+                            h = window.innerHeight * 0.70; // 占据视窗的70%
+
+                            var r = 1080 / 1920;
+
+                            if (w * r > h) {
+                                w = Math.min(w, Math.ceil(h / r));
+                            }
+                            h = Math.floor(w * r);
+                        } else {
+                            w = 1920;
+                            h = 1080;
+                        }
                     }
 
                     container.style.width = canvas.style.width = w + "px";
                     container.style.height = canvas.style.height = h + "px";
                 }
+
                 createUnityInstance(canvas, config, progressHandler).then(function (instance) {
                     canvas = instance.Module.canvas;
                     onResize();
                 });
+
                 window.addEventListener('resize', onResize);
                 onResize();
 
@@ -321,12 +356,12 @@
                     document.getElementsByTagName('head')[0].appendChild(meta);
                 }
 
-				document.getElementById('down-arrow-concept').addEventListener('click', function() {
-					const imageContainer = document.getElementById('imageContainer');
-					if (imageContainer) {
-						imageContainer.scrollIntoView({ behavior: 'smooth' });
-					}
-				});
+                document.getElementById('down-arrow-concept').addEventListener('click', function() {
+                    const imageContainer = document.getElementById('imageContainer');
+                    if (imageContainer) {
+                        imageContainer.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
             </script>
         </div>
 		<div id="title-arrow-box">
@@ -354,5 +389,27 @@
             imageContainer.scrollIntoView({ behavior: 'smooth' });
         }
     });
+</script>
+<script>
+    function checkOrientation() {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const isLandscape = window.innerWidth > window.innerHeight;
+        const leftNav = document.getElementById('left-nav');
+        const rightNav = document.getElementById('right-nav');
+        const gameContainer = document.getElementById('gameContainer');
+
+        if (isMobile && isLandscape) {
+            if (leftNav) leftNav.style.display = 'none';
+            if (rightNav) rightNav.style.display = 'none';
+            if (gameContainer) gameContainer.style.marginTop = '0';
+        } else {
+            if (leftNav) leftNav.style.display = 'block';
+            if (rightNav) rightNav.style.display = 'block';
+            if (gameContainer) gameContainer.style.marginTop = '15vh'; // 恢复原来的 margin-top
+        }
+    }
+
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('load', checkOrientation);
 </script>
 </html>
