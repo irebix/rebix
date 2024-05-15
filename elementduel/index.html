@@ -97,8 +97,8 @@
             padding: 0 0; /* 移除两边的边框 */
             height: auto; 
             width: 65%;
-			display: grid; /* 使用grid布局 */
-			grid-template-columns: repeat(2, 1fr); /* 定义两列 */
+            display: flex;
+            flex-wrap: wrap; /* 允许换行 */
 			gap: 10px; /* 图片之间的间距 */
             padding-bottom: 5vh;
 			align-items: center;
@@ -110,7 +110,7 @@
             margin-bottom: 0.1vh;
     	}
 		#imageContainer img:first-child {
-            grid-column: span 2; /* 第一张图片占据两列 */
+            flex: 1 1 100%; /* 每行显示一张图片 */
     	}
         footer {
             width: 100%;
@@ -214,13 +214,23 @@
                 margin-top: 15vh; /* 为导航栏腾出空间 */
             }
 		}
-        @media (max-width: 800px), (max-height: 800px) {
+        @keyframes fadeIn {
+            0% {
+                background-color: white;
+            }
+            100% {
+                background-color: black;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 2s forwards; /* 2秒渐变，forwards确保动画结束后保持最终状态 */
         }
 
     </style>
 </head>
 
-<body>
+<body class="fade-in">
     <div id="container">
 		<nav id="left-nav">
 			<ul>
@@ -239,6 +249,10 @@
             <canvas id="unity-canvas" data-pixel-art="false"></canvas>
             <script src="Build/ElementDuelWebGL.loader.js"></script>
             <script>
+                document.getElementById('unity-canvas').addEventListener('wheel', function(event) {
+                    event.stopPropagation();
+                }, true);
+
                 var canvas = document.querySelector("#unity-canvas");
                 var config = {
                     dataUrl: "Build/ElementDuelWebGL.data.unityweb",
@@ -266,7 +280,7 @@
                     if (!progressBarText) {
                         progressBarText = document.createElement('div');
                         progressBarText.style.position = 'absolute';
-                        progressBarText.style.top = 'calc(50% - 3rem)'; // 调整位置，使其位于进度条正上方
+                        progressBarText.style.top = 'calc(50% - 4.5rem)'; // 调整位置，使其位于进度条正上方
                         progressBarText.style.left = '50%';
                         progressBarText.style.transform = 'translateX(-50%)';
                         progressBarText.style.color = 'white';
@@ -282,17 +296,17 @@
                     if (!progressBarMessage) {
                         progressBarMessage = document.createElement('div');
                         progressBarMessage.style.position = 'absolute';
-                        progressBarMessage.style.top = 'calc(50% + 1rem)'; // 调整位置，使其位于进度条下方
+                        progressBarMessage.style.top = 'calc(50% + 1.2rem)'; // 调整位置，使其位于进度条下方
                         progressBarMessage.style.left = '50%';
                         progressBarMessage.style.transform = 'translateX(-50%)';
                         progressBarMessage.style.color = 'white';
-                        progressBarMessage.style.fontSize = '1rem'; // 设置字体大小
+                        progressBarMessage.style.fontSize = '1.25rem'; // 设置字体大小
                         progressBarMessage.style.textAlign = 'center';
                         progressBarMessage.style.width = '100%';
-                        progressBarMessage.style.height = '1.5rem'; // 调整高度以适应字体大小
+                        progressBarMessage.style.height = '3rem'; // 调整高度以适应字体大小
                         progressBarMessage.style.lineHeight = '1.5rem';
                         progressBarMessage.style.zIndex = '1';
-                        progressBarMessage.textContent = '正在进入元素世界...（tips：移动端横屏效果更佳）';
+                        progressBarMessage.innerHTML = '正在进入元素世界...<br><span style="font-size: 1rem; margin-top: 0.5rem; display: block;">tips：移动端横屏效果更佳</span>'; // 设置tips的字体大小和位置
                         canvas.parentElement.appendChild(progressBarMessage);
                     }
 
@@ -343,6 +357,11 @@
                 createUnityInstance(canvas, config, progressHandler).then(function (instance) {
                     canvas = instance.Module.canvas;
                     onResize();
+
+                    // 添加滚轮事件监听器
+                    document.getElementById('unity-canvas').addEventListener('wheel', function(event) {
+                        event.stopPropagation();
+                    }, true);
                 });
 
                 window.addEventListener('resize', onResize);
@@ -389,8 +408,6 @@
             imageContainer.scrollIntoView({ behavior: 'smooth' });
         }
     });
-</script>
-<script>
     function checkOrientation() {
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const isLandscape = window.innerWidth > window.innerHeight;
