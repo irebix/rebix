@@ -52,7 +52,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			padding: 10vh;
+			padding: 8vh;
 		}
 
 		/* 标题样式 */
@@ -224,14 +224,15 @@
     <div id="container">
 		<nav id="left-nav">
 			<ul>
-				<li><a id="refresh-page" href="http://101.133.147.25/">马克笔</a></li>
+				<li><a id="refresh-page" href="/">马克笔</a></li>
 			</ul>
 		</nav>
         <nav id="right-nav">
             <ul>
-                <li><a class="scroll-link" href="http://101.133.147.25/concept/index.html">概念设计</a></li>
-                <li><a class="scroll-link" href="http://101.133.147.25/illustration/index.html">插画设计</a></li>
-                <li><a class="scroll-link active" href="http://101.133.147.25/elementduel/index.html">独立游戏</a></li>
+                <li><a class="scroll-link" href="/index.html#project">游戏项目</a></li>
+                <li><a class="scroll-link" href="/concept/index.html">概念设计</a></li>
+                <li><a class="scroll-link" href="/illustration/index.html">插画设计</a></li>
+                <li><a class="scroll-link active" href="/elementduel/index.html">独立游戏</a></li>
             </ul>
         </nav>
 		<div id="gameContainer">
@@ -268,15 +269,24 @@
         const leftNav = document.getElementById('left-nav');
         const rightNav = document.getElementById('right-nav');
         const gameContainer = document.getElementById('gameContainer');
+        const iframe = gameContainer ? gameContainer.querySelector('iframe') : null;
 
         if (isMobile && isLandscape) {
             if (leftNav) leftNav.style.display = 'none';
             if (rightNav) rightNav.style.display = 'none';
-            if (gameContainer) gameContainer.style.marginTop = '0';
+            if (gameContainer) {
+                gameContainer.style.marginTop = '0';
+                gameContainer.style.height = '100%'; // 横屏模式下设置gameContainer高度为100%
+            }
+            if (iframe) iframe.style.height = '100vh'; // 横屏模式下设置iframe高度为440px
         } else {
             if (leftNav) leftNav.style.display = 'block';
             if (rightNav) rightNav.style.display = 'block';
-            if (gameContainer) gameContainer.style.marginTop = '15vh'; // 恢复原来的 margin-top
+            if (gameContainer) {
+                gameContainer.style.marginTop = '15vh'; // 恢复原来的 margin-top
+                gameContainer.style.height = '70vh'; // 恢复原来的高度
+            }
+            if (iframe) iframe.style.height = window.innerHeight * 0.7 + 'px'; // 竖屏模式下设置高度为视口的70%
         }
     }
 
