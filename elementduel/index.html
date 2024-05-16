@@ -1,21 +1,297 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh">
 
-<body>
-  <iframe src="http://element.zhuxb.cn/" frameborder="0"></iframe>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>元素对决</title>
+    <style>
+        html,
+        body {
+            background: #000;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* 隐藏全局滚动条 */
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .hidden {
+            display: none !important;
+        }
+        #container {
+            overflow-y: auto; /* 使整个容器可滚动 */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 水平居中 */
+			position: relative;
+        }
+
+        #gameContainer {
+            background: transparent !important;
+            position: relative;
+            height: 70vh; /* 占据视窗的65% */
+            width: 100%;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: relative;
+        }
+
+
+
+		#title-arrow-box {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 10vh;
+		}
+
+		/* 标题样式 */
+		#imageTitle {
+            color: rgb(200, 200, 200);
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+		#down-arrow-concept {
+			position: relative;
+			margin: 0 auto;
+			width: 0;
+			height: 0;
+			border-left: 20px solid transparent;
+			border-right: 20px solid transparent;
+			border-top: 20px solid rgb(200, 200, 200);
+			cursor: pointer;
+			animation: floatArrow 2s ease-in-out infinite;
+		}
+
+		@keyframes floatArrow {
+			0%, 100% {
+				transform: translateY(0);
+			}
+			50% {
+				transform: translateY(10px);
+			}
+		}
+
+        #imageContainer {
+            padding: 0 0; /* 移除两边的边框 */
+            height: auto; 
+            width: 65%;
+            display: flex;
+            flex-wrap: wrap; /* 允许换行 */
+			gap: 10px; /* 图片之间的间距 */
+            padding-bottom: 5vh;
+			align-items: center;
+        }
+
+		#imageContainer img {
+            width: 100%;
+            max-width: 100%; /* 确保图片在网格中占满 */
+            margin-bottom: 0.1vh;
+    	}
+		#imageContainer img:first-child {
+            flex: 1 1 100%; /* 每行显示一张图片 */
+    	}
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background: #000;
+            color: rgb(200, 200, 200);
+            position: relative;
+            bottom: 0;
+        }
+
+        /* 导航栏样式 */
+        #right-nav, #left-nav {
+            position: absolute;
+            top: 20px;
+            padding: 10px;
+            z-index: 3;
+            font-size: 18px;
+            cursor: pointer;
+            color: rgb(200, 200, 200);
+            text-decoration: none;
+        }
+
+        #right-nav {
+            right: calc(100% * 0.2);
+        }
+
+        #left-nav {
+            left: calc(100% * 0.2);
+        }
+
+        #right-nav a, #left-nav a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        #left-nav a:hover {
+            color: #555;
+        }
+        
+        #right-nav a {
+            position: relative; /* 确保伪元素相对于链接进行定位 */
+            text-decoration: none; /* 移除默认的下划线 */
+            color: inherit; /* 保持原有的文字颜色 */
+        }
+
+        #right-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; /* 调整下划线的位置 */
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: currentColor; /* 使用当前文字颜色 */
+            border-radius: 2px; /* 可选：添加圆角效果 */
+            transition: transform 0.3s ease; /* 添加过渡效果 */
+            transform: scaleX(0); /* 初始状态下隐藏下划线 */
+        }
+
+        #right-nav a:hover::after {
+            transform: scaleX(1); /* 悬停时显示下划线 */
+        }
+
+        #right-nav a.active::after {
+            transform: scaleX(1); /* 选中态下显示下划线 */
+        }
+
+        #right-nav ul, #left-nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #right-nav ul li, #left-nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+		@media (max-aspect-ratio: 16/10) {
+            
+			#right-nav {
+				top: 20px;
+				right: 0; /* 页面宽度的15% */
+				padding: 10px;
+			}
+			#left-nav {
+				top: 20px;
+				left: 0; /* 页面宽度的15% */
+				padding: 10px;
+			}
+			#imageContainer {
+				gap: 5px;
+				width: 100%
+			}                     
+            div#gameContainer {
+                background: transparent !important;
+                position: relative;
+                height: 70vh; /* 占据视窗的65% */
+                width: 100%;
+                display: flex;
+                justify-content: center; /* 水平居中 */
+                align-items: center; /* 垂直居中 */
+                margin-top: 15vh; /* 为导航栏腾出空间 */
+            }
+		}
+        @keyframes fadeIn {
+            0% {
+                background-color: white;
+            }
+            100% {
+                background-color: black;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 2s forwards; /* 2秒渐变，forwards确保动画结束后保持最终状态 */
+        }
+
+    </style>
+</head>
+
+<body class="fade-in">
+    <div id="container">
+		<nav id="left-nav">
+			<ul>
+				<li><a id="refresh-page" href="http://101.133.147.25/">马克笔</a></li>
+			</ul>
+		</nav>
+        <nav id="right-nav">
+            <ul>
+                <li><a class="scroll-link" href="http://101.133.147.25/concept/index.html">概念设计</a></li>
+                <li><a class="scroll-link" href="http://101.133.147.25/illustration/index.html">插画设计</a></li>
+                <li><a class="scroll-link active" href="http://101.133.147.25/elementduel/index.html">独立游戏</a></li>
+            </ul>
+        </nav>
+		<div id="gameContainer">
+            <iframe src="http://element.zhuxb.cn/" frameborder="0"></iframe>
+        </div>
+		<div id="title-arrow-box">
+			<h2 id="imageTitle">美术概念</h2>
+			<div id="down-arrow-concept"></div>
+		</div>
+        <div id="imageContainer">
+            <img src="https://rebix.oss-cn-shanghai.aliyuncs.com/img/e1.jpg" alt="Concept Art 1" loading="lazy">
+            <img src="https://rebix.oss-cn-shanghai.aliyuncs.com/img/e2.jpg" alt="Concept Art 2" loading="lazy">
+            <img src="https://rebix.oss-cn-shanghai.aliyuncs.com/img/e3.jpg" alt="Concept Art 3" loading="lazy">
+            <img src="https://rebix.oss-cn-shanghai.aliyuncs.com/img/e4.jpg" alt="Concept Art 4" loading="lazy">
+            <img src="https://rebix.oss-cn-shanghai.aliyuncs.com/img/e5.jpg" alt="Concept Art 5" loading="lazy">
+            <img src="https://rebix.oss-cn-shanghai.aliyuncs.com/img/e6.jpg" alt="Concept Art 6" loading="lazy">
+            <img src="https://rebix.oss-cn-shanghai.aliyuncs.com/img/e7.jpg" alt="Concept Art 7" loading="lazy">
+        </div>
+        <footer>
+            <p>© 2024 Rebix</p>
+        </footer>
+    </div>
 </body>
+<script>
+    document.getElementById('down-arrow-concept').addEventListener('click', function() {
+        const imageContainer = document.getElementById('imageContainer');
+        if (imageContainer) {
+            imageContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    function checkOrientation() {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const isLandscape = window.innerWidth > window.innerHeight;
+        const leftNav = document.getElementById('left-nav');
+        const rightNav = document.getElementById('right-nav');
+        const gameContainer = document.getElementById('gameContainer');
 
+        if (isMobile && isLandscape) {
+            if (leftNav) leftNav.style.display = 'none';
+            if (rightNav) rightNav.style.display = 'none';
+            if (gameContainer) gameContainer.style.marginTop = '0';
+        } else {
+            if (leftNav) leftNav.style.display = 'block';
+            if (rightNav) rightNav.style.display = 'block';
+            if (gameContainer) gameContainer.style.marginTop = '15vh'; // 恢复原来的 margin-top
+        }
+    }
+
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('load', checkOrientation);
+    // 获取gameContainer的iframe元素，设置高度为视口的70%，以像素为单位
+    function handleIframe() {
+        const gameContainer = document.getElementById('gameContainer');
+        if (gameContainer) {
+            const iframe = gameContainer.querySelector('iframe');
+            if (iframe) {
+                iframe.style.height = window.innerHeight * 0.7 + 'px';
+            }
+        }
+    }
+    handleIframe()
+</script>
 </html>
-
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  iframe {
-    width: 100vw;
-    height: 100vh;
-  }
-</style>
