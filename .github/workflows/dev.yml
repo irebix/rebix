@@ -16,4 +16,4 @@ jobs:
           port: 21
           connect_timeout: 10s
           local: "./*" # 源路径（工作流）
-          remote: /usr/share/doc/HTML          # 目标路径（服务器）
+          remote: /usr/share/doc/HTML/        # 目标路径（服务器）
