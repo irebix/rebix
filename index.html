@@ -99,7 +99,7 @@
         <section id="tools">
             <h2>工具开发</h2>
             <div class="video-container">
-                <video controls src="videos/引擎工具演示1080p.mp4" alt="Tool Demo Video" loading="lazy">
+                <video id="tool-demo-video" controls muted src="videos/引擎工具演示1080p.mp4" alt="Tool Demo Video" loading="lazy">
                     Your browser does not support the video tag.
                 </video>
                 <div class="tool-description">
@@ -274,6 +274,24 @@
         // 在页面加载和窗口大小改变时设置悬停图片的尺寸
         window.addEventListener('load', setHoverImgSize);
         window.addEventListener('resize', setHoverImgSize);
+    });
+    //自动播放视频
+    document.addEventListener('DOMContentLoaded', function() {
+        const video = document.getElementById('tool-demo-video');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            });
+        }, {
+            threshold: 0.5 // 当视频有50%可见时触发
+        });
+
+        observer.observe(video);
     });
 </script>
 </html>
