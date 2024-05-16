@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Noto Sans SC';
 }
 
 header {
@@ -195,7 +195,7 @@ h2:not(+ .h2-tagline) {
 
 .project-description p:first-child {
     font-size: 35px; /* 第一行字体较大 */
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 10px; /* 增加与第二行的间距 */
 }
 
@@ -316,7 +316,7 @@ h2:not(+ .h2-tagline) {
 .tool-description p:first-child {
     font-size: 35px; /* 第一行字体较大 */
     margin-bottom: 50px; /* 增加与第二行的间距 */
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .tool-description p:last-child {
