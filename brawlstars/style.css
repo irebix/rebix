@@ -12,6 +12,7 @@ html, body {
 }
 
 body {
+    font-family: 'Noto Sans SC';
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,9 +23,9 @@ body {
 }
 
 h1 {
-    font-size: 50px;
+    font-size: 60px;
     margin: 0.5em 0; /* 调整间距 */
-    margin-top: 5em;
+    margin-top: 3em;
 }
 
 #tagline {
@@ -55,78 +56,67 @@ h1 {
 }
 
 /* 导航栏样式 */
-#right-nav, #left-nav {
-    position: absolute;
-    top: 20px;
-    padding: 10px;
-    z-index: 3;
-    font-size: 18px;
-    cursor: pointer;
-    color: black;
-    text-decoration: none;
+#main-nav {
+    background-color: rgb(247, 247, 247); /* 设置半透明背景 */
+    position: relative; /* 固定在页面顶部 */
+    top: 0;
+    left: 0;
+    width: 100%; /* 占满整个页面宽度 */
+    z-index: 20; /* 确保在最上层显示 */
+    display: flex;
+    justify-content: space-between; /* 左右分布 */
+    align-items: center; /* 垂直居中对齐 */
 }
 
 #right-nav {
-    right: calc(100% * 0.2);
-}
-
-#left-nav {
-    left: calc(100% * 0.2);
+    color: black;
+    position: absolute;
+    padding-right: 10px;
+    right: 25%;
+    z-index: 3; /* 确保导航栏在最上层 */
+    font-size: 15px; 
+    cursor: pointer;
 }
 
 #right-nav a, #left-nav a {
-    color: inherit;
-    text-decoration: none;
+    color: inherit; /* 链接颜色继承父元素颜色 */
+    text-decoration: none; /* 去除下划线 */
+    position: relative; /* 确保伪元素相对于链接进行定位 */
+}
+
+#right-nav a:hover {
+    color: #555; /* 悬停时的颜色，可以根据需要调整 */
+}
+
+#right-nav ul li {
+    display: inline;
+    margin-left: 15px;
+    margin-right: 15px; /* 增加右边距 */
+}
+#left-nav {
+    color: black;
+    font-size: 18px;
+    padding-left: 25%;
+    z-index: 4;
+    cursor: pointer;
+}
+
+#left-nav ul {
+    list-style-type: none;
 }
 
 #left-nav a:hover {
-    color: #555;
-}
-
-#right-nav a {
-    position: relative; /* 确保伪元素相对于链接进行定位 */
-    text-decoration: none; /* 移除默认的下划线 */
-    color: inherit; /* 保持原有的文字颜色 */
-}
-
-#right-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px; /* 调整下划线的位置 */
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: currentColor; /* 使用当前文字颜色 */
-    border-radius: 2px; /* 可选：添加圆角效果 */
-    transition: transform 0.3s ease; /* 添加过渡效果 */
-    transform: scaleX(0); /* 初始状态下隐藏下划线 */
-}
-
-#right-nav a:hover::after {
-    transform: scaleX(1); /* 悬停时显示下划线 */
-}
-
-#right-nav a.active::after {
-    transform: scaleX(1); /* 选中态下显示下划线 */
-}
-
-#right-nav ul, #left-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#right-nav ul li, #left-nav ul li {
-    display: inline;
-    margin: 0 10px;
+    color: #c2c2c2;
 }
 
 @media (max-aspect-ratio: 4/3) {
-    #right-nav {
-        right: calc(100% * 0);
-    }
-    
     #left-nav {
-        left: calc(100% * 0);
+        padding-left: 0;
+        font-size: 25px;
+    }
+    #right-nav {
+        font-size: 18px; 
+        right: 0; /* 页面宽度的15% */
     }
     .image-gallery {
         grid-template-columns: repeat(1, 1fr);

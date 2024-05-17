@@ -1,5 +1,9 @@
 body {
     font-family: 'Noto Sans SC';
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 /* 检测iOS系统并应用苹果字体 */
 @supports (-webkit-touch-callout: none) {
@@ -56,7 +60,7 @@ h1 {
     transform: translate(-50%, -50%);   
     font-size: 70px;
     letter-spacing: 4px; /* 增加字间距 */
-    z-index: 3;
+    z-index: 1;
     text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
 }
 
@@ -86,7 +90,7 @@ h2:not(+ .h2-tagline) {
     padding: 20px;
     text-align: center;
     font-size: 25px;
-    z-index: 3;
+    z-index: 1;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
 
 }
@@ -117,16 +121,28 @@ h2:not(+ .h2-tagline) {
 
 }
 
+#main-nav {
+    background-color: rgba(235, 235, 235, 0.8); /* 设置半透明背景 */
+    backdrop-filter: blur(15px); /* 添加毛玻璃效果 */
+    position: fixed; /* 固定在页面顶部 */
+    top: 0;
+    left: 0;
+    width: 100%; /* 占满整个页面宽度 */
+    z-index: 20; /* 确保在最上层显示 */
+    display: flex;
+    justify-content: space-between; /* 左右分布 */
+    align-items: center; /* 垂直居中对齐 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+}
+
 #right-nav {
-    color: white;
+    color: black;
     position: absolute;
-    top: 20px;
-    right: calc(100% * 0.2); /* 页面宽度的15% */
-    padding: 10px;
+    padding-right: 10px;
+    right: 25%;
     z-index: 3; /* 确保导航栏在最上层 */
-    font-size: 18px; 
+    font-size: 15px; 
     cursor: pointer;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
 }
 
 #right-nav a {
@@ -138,44 +154,26 @@ h2:not(+ .h2-tagline) {
     color: #555; /* 悬停时的颜色，可以根据需要调整 */
 }
 
-#right-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
 #right-nav ul li {
     display: inline;
-    margin-left: 10px;
-    margin-left: 10px; /* 增加左边距 */
-    margin-right: 10px; /* 增加右边距 */
+    margin-left: 15px;
+    margin-right: 15px; /* 增加右边距 */
 }
 
 #left-nav {
-    position: absolute;
-    top: 0;
-    left: calc(100% * 0.2);
-    color: white;
-    padding: 5px;
-    font-size: 25px;
+    color: black;
+    font-size: 18px;
+    padding-left: 25%;
     z-index: 4;
     cursor: pointer;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
-
 }
 
 #left-nav ul {
     list-style-type: none;
 }
 
-#left-nav a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-}
-
 #left-nav a:hover {
-    color: #555;
+    color: #c2c2c2;
 }
 
 #project {
@@ -206,6 +204,7 @@ h2:not(+ .h2-tagline) {
     border-radius: 30px;
     cursor: pointer;
     font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 按钮的阴影效果 */
 }
 
 .learn-more-btn:hover {
@@ -213,7 +212,7 @@ h2:not(+ .h2-tagline) {
 }
 
 #right-nav a:hover {
-    color: #555; /* 悬停时的颜色，可以根据需要调整 */
+    color: #c2c2c2; /* 悬停时的颜色，可以根据需要调整 */
 }
 
 .project-description p:first-child {
@@ -282,46 +281,6 @@ h2:not(+ .h2-tagline) {
     flex-direction: row-reverse; /* 反转顺序 */
 }
 
-/* 使用 @media 查询实现响应式设计 */
-@media (max-aspect-ratio: 4/3) {
-    #project {
-        padding-top: 25%; /* 将顶部的 padding 缩短 10% */
-    }
-    .project-container {
-        display: block;
-        flex-direction: column; /* 使项目竖直排列 */
-        align-items: center; /* 居中对齐 */
-    }
-
-    .project-row {
-        flex-direction: column; /* 使项目竖直排列 */
-        align-items: center; /* 居中对齐 */
-        margin-bottom: 120px; /* 添加适当的间距 */
-        width: 100%; /* 调整项目宽度 */
-        padding: 0; /* 移除内边距 */
-    }
-
-    .project-row .project-description {
-        text-align: center; /* 文本居中对齐 */
-    }
-
-    .main-img {
-        width: 100%; /* 调整图片宽度 */
-        margin-bottom: 10px; /* 添加图片与描述之间的间距 */
-    }
-
-    .project-row a {
-        width: 100%; /* 设置链接宽度为容器的100% */
-    }
-    .project-row.reverse {
-        flex-direction: column; /* 使项目竖直排列 */
-    }
-    .project-row.reverse .project-description {
-        text-align: center; /* 在reverse类下文本靠右对齐 */
-    }
-
-}
-
 /* 检测屏幕宽度是否小于等于768px（常见的移动端宽度） */
 
 
@@ -332,9 +291,10 @@ h2:not(+ .h2-tagline) {
 }
 
 .video-container video {
-    width: 100%; /* 视频宽度，根据需要调整 */
+    width: 80%; /* 视频宽度，根据需要调整 */
     height: auto; /* 保持视频的原始比例 */
     margin: 0 auto; /* 水平居中视频 */
+    border-radius: 20px;
 }
 
 .tool-description {
@@ -388,31 +348,6 @@ h2:not(+ .h2-tagline) {
     cursor: zoom-in; /* 鼠标悬停时显示放大镜图标 */
 }
 
-@media (max-aspect-ratio: 1/1) {
-    #left-nav {
-        position: absolute;
-        left: 0;
-        font-size: 25px;
-        z-index: 4;
-    }
-    #right-nav {
-        position: absolute;
-        top: 20px;
-        right: 0; 
-        z-index: 3; /* 确保导航栏在最上层 */
-        font-size: 18px; 
-    }
-    .img-gallery {
-        flex-direction: column; /* 将子元素排列改为竖直排列 */
-        align-items: center; /* 子元素在交叉轴上居中对齐 */
-        gap: 10px;
-    }
-
-    .img-gallery a {
-        width: 100%; /* 调整宽度以适应竖屏显示 */
-    }
-}
-
 section {
     /* width: 100%;  */
     box-sizing: content-box;
@@ -431,10 +366,9 @@ section h2 {
 img {
     width: 100%;
     transition: transform 0.2s;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-
-
 
 #fullscreen-image {
     width: 100vw; /* 视口宽度 */
@@ -510,13 +444,6 @@ img {
     user-select: none;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}
-
 /* 页脚样式 */
 footer {
     width: 100%;
@@ -535,4 +462,64 @@ footer a {
 }
 footer a:hover {
     color: #888; /* 悬停时改变颜色 */
+}
+/* 使用 @media 查询实现响应式设计 */
+@media (max-aspect-ratio: 4/3) {
+    #left-nav {
+        padding-left: 0;
+        font-size: 25px;
+    }
+    #right-nav {
+        font-size: 18px; 
+        right: 0; /* 页面宽度的15% */
+    }
+    .img-gallery {
+        flex-direction: column; /* 将子元素排列改为竖直排列 */
+        align-items: center; /* 子元素在交叉轴上居中对齐 */
+        gap: 10px;
+    }
+
+    .img-gallery a {
+        width: 100%; /* 调整宽度以适应竖屏显示 */
+    }
+
+    #project {
+        padding-top: 25%; /* 将顶部的 padding 缩短 10% */
+    }
+    .project-container {
+        display: block;
+        flex-direction: column; /* 使项目竖直排列 */
+        align-items: center; /* 居中对齐 */
+    }
+
+    .project-row {
+        flex-direction: column; /* 使项目竖直排列 */
+        align-items: center; /* 居中对齐 */
+        margin-bottom: 120px; /* 添加适当的间距 */
+        width: 100%; /* 调整项目宽度 */
+        padding: 0; /* 移除内边距 */
+    }
+
+    .project-row .project-description {
+        text-align: center; /* 文本居中对齐 */
+    }
+
+    .main-img {
+        width: 100%; /* 调整图片宽度 */
+        margin-bottom: 10px; /* 添加图片与描述之间的间距 */
+    }
+
+    .project-row a {
+        width: 100%; /* 设置链接宽度为容器的100% */
+    }
+    .project-row.reverse {
+        flex-direction: column; /* 使项目竖直排列 */
+    }
+    .project-row.reverse .project-description {
+        text-align: center; /* 在reverse类下文本靠右对齐 */
+    }
+    .video-container video {
+        width: 100%; /* 视频宽度，根据需要调整 */
+    }
+
 }

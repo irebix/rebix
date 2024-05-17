@@ -12,18 +12,20 @@
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap"rel="stylesheet"/>
     </head>
     <body>
-        <nav id="left-nav">
-            <ul>
-                <li><a id="refresh-page" onclick="window.location.reload(); return false;">马克笔</a></li>
-            </ul>
-        </nav>
-        <nav id="right-nav">
-            <ul>
-                <li><a class="scroll-link" data-target="project">游戏项目</a></li>
-                <li><a class="scroll-link" data-target="concept">概念设计</a></li>
-                <li><a class="scroll-link" data-target="illustration">插画设计</a></li>
-                <li><a class="scroll-link" data-target="tools">工具开发</a></li>
-            </ul>
+        <nav id="main-nav">
+            <div id="left-nav">
+                <ul>
+                    <li><a id="refresh-page" onclick="window.scrollTo(0, 0); window.location.reload(); return false;">马克笔</a></li>
+                </ul>
+            </div>
+            <div id="right-nav">
+                <ul>
+                    <li><a class="scroll-link" data-target="project">游戏项目</a></li>
+                    <li><a class="scroll-link" data-target="concept">概念设计</a></li>
+                    <li><a class="scroll-link" data-target="illustration">插画设计</a></li>
+                    <li><a class="scroll-link" data-target="tools">工具开发</a></li>
+                </ul>
+            </div>
         </nav>
     
         <header>
