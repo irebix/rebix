@@ -5,6 +5,12 @@ html, body {
     overflow-x: hidden; /* 禁止水平滚动 */
 }
 
+@supports (-webkit-touch-callout: none) {
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+}
+
 body {
     display: flex;
     flex-direction: column;

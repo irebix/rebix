@@ -1,6 +1,12 @@
 body {
     font-family: 'Noto Sans SC';
 }
+/* 检测iOS系统并应用苹果字体 */
+@supports (-webkit-touch-callout: none) {
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+}
 
 header {
     text-align: center;
