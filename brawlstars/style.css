@@ -106,7 +106,7 @@ h1 {
 }
 
 #left-nav a:hover {
-    color: #c2c2c2;
+    color: #555;
 }
 
 @media (max-aspect-ratio: 4/3) {

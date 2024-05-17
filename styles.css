@@ -173,7 +173,7 @@ h2:not(+ .h2-tagline) {
 }
 
 #left-nav a:hover {
-    color: #c2c2c2;
+    color: #555;
 }
 
 #project {
@@ -212,7 +212,7 @@ h2:not(+ .h2-tagline) {
 }
 
 #right-nav a:hover {
-    color: #c2c2c2; /* 悬停时的颜色，可以根据需要调整 */
+    color: #555; /* 悬停时的颜色，可以根据需要调整 */
 }
 
 .project-description p:first-child {
