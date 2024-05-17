@@ -322,6 +322,14 @@ h2:not(+ .h2-tagline) {
 
 }
 
+/* 检测屏幕宽度是否小于等于768px（常见的移动端宽度） */
+@media (max-width: 1080px) {
+    .learn-more-btn {
+        padding: 20px 50px; /* 增大按钮的内边距 */
+        font-size: 20px; /* 增大按钮内字体的大小 */
+    }
+}
+
 .video-container {
     text-align: center; /* 使容器内的内容居中 */
     padding: 5%; /* 添加适当的内边距 */
