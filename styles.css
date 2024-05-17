@@ -61,7 +61,7 @@ h1 {
     font-size: 70px;
     letter-spacing: 4px; /* 增加字间距 */
     z-index: 1;
-    text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+    text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5); /* 添加阴影效果 */
 }
 
 h2 {
