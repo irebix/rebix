@@ -148,3 +148,11 @@ footer {
     font-size: 14px;
     text-align: center;
 }
+
+footer a {
+    color: #333;
+    text-decoration: none;
+}
+footer a:hover {
+    color: #888; /* 悬停时改变颜色 */
+}
