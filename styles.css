@@ -200,16 +200,16 @@ h2:not(+ .h2-tagline) {
     display: inline-block; /* 使按钮成为行内块元素 */
     margin-top: 8px; /* 添加顶部间距 */
     padding: 15px 50px;
-    background-color: #007BFF;
+    background-color: #816256;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 30px;
     cursor: pointer;
     font-size: 16px;
 }
 
 .learn-more-btn:hover {
-    background-color: #0056b3;
+    background-color: #5a443c;;
 }
 
 #right-nav a:hover {
@@ -323,12 +323,7 @@ h2:not(+ .h2-tagline) {
 }
 
 /* 检测屏幕宽度是否小于等于768px（常见的移动端宽度） */
-@media (max-width: 1080px) {
-    .learn-more-btn {
-        padding: 20px 50px; /* 增大按钮的内边距 */
-        font-size: 20px; /* 增大按钮内字体的大小 */
-    }
-}
+
 
 .video-container {
     text-align: center; /* 使容器内的内容居中 */
