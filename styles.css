@@ -195,6 +195,23 @@ h2:not(+ .h2-tagline) {
     text-align: left; /* 默认情况下文本靠左对齐 */
     
 }
+
+.learn-more-btn {
+    display: inline-block; /* 使按钮成为行内块元素 */
+    margin-top: 8px; /* 添加顶部间距 */
+    padding: 15px 50px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.learn-more-btn:hover {
+    background-color: #0056b3;
+}
+
 #right-nav a:hover {
     color: #555; /* 悬停时的颜色，可以根据需要调整 */
 }
@@ -267,6 +284,9 @@ h2:not(+ .h2-tagline) {
 
 /* 使用 @media 查询实现响应式设计 */
 @media (max-aspect-ratio: 4/3) {
+    #project {
+        padding-top: 25%; /* 将顶部的 padding 缩短 10% */
+    }
     .project-container {
         display: block;
         flex-direction: column; /* 使项目竖直排列 */
@@ -276,7 +296,7 @@ h2:not(+ .h2-tagline) {
     .project-row {
         flex-direction: column; /* 使项目竖直排列 */
         align-items: center; /* 居中对齐 */
-        margin-bottom: 40px; /* 添加适当的间距 */
+        margin-bottom: 120px; /* 添加适当的间距 */
         width: 100%; /* 调整项目宽度 */
         padding: 0; /* 移除内边距 */
     }
