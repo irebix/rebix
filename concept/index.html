@@ -6,6 +6,15 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap"rel="stylesheet"/>
     <link rel="icon" href="https://rebix.oss-cn-shanghai.aliyuncs.com/img/favicon.png" type="image/png">
     <link rel="stylesheet" href="/brawlstars/style.css">
+    <script>
+        if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // Mobile device style: set the viewport to scale the text size
+            const meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, initial-scale=0.65, user-scalable=no';
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
+    </script>
 </head>
 <body>
     <nav id="main-nav">
