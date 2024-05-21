@@ -92,7 +92,6 @@ h2:not(+ .h2-tagline) {
     font-size: 25px;
     z-index: 1;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
-
 }
 
 @keyframes floatArrow {
@@ -540,7 +539,13 @@ footer a:hover {
     }
     #fullscreen-image {
         object-position: 42% center; /* 向右移动图片内容 */
-    }    
+    }
+    h1 {
+        top: 40%;
+    }   
+    #tagline {
+        top: calc(40% + 70px);
+    }
 }
 
 /* 停用手机端的悬停效果 */
