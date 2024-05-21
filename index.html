@@ -309,6 +309,87 @@
 
         observer.observe(video);
     });
+    document.addEventListener('DOMContentLoaded', function() {
+        const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const projectRows = document.querySelectorAll('.project-row');
+
+        const setHoverImgSize = (mainImg, hoverImg, row) => {
+            const mainImgRect = mainImg.getBoundingClientRect();
+            hoverImg.style.width = `${mainImgRect.width}px`;
+            hoverImg.style.height = `${mainImgRect.height}px`;
+            hoverImg.style.top = `${mainImgRect.top - row.getBoundingClientRect().top}px`;
+            hoverImg.style.left = `${mainImgRect.left - row.getBoundingClientRect().left}px`;
+        };
+
+        if (isMobile) {
+            const observerOptions = {
+                root: null,
+                rootMargin: '-25% 0px -25% 0px', // 调整触发时机，使得元素中心进入视口时触发
+                threshold: 0.7 // 当元素有50%可见时触发
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const hoverImg = entry.target.querySelector('.hover-img');
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        if (hoverImg) {
+                            hoverImg.style.opacity = 1;
+                        }
+                    } else {
+                        entry.target.classList.remove('in-view');
+                        if (hoverImg) {
+                            hoverImg.style.opacity = 0;
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            projectRows.forEach(row => {
+                observer.observe(row);
+            });
+
+            // 禁用点击事件触发 hover img 显示
+            projectRows.forEach(row => {
+                row.addEventListener('click', (event) => {
+                    const hoverImg = row.querySelector('.hover-img');
+                    if (hoverImg && event.target !== hoverImg) {
+                        hoverImg.style.opacity = 0;
+                    }
+                });
+            });
+        } else {
+            // 仅在非移动设备上应用悬停效果
+            projectRows.forEach(row => {
+                const mainImg = row.querySelector('.main-img');
+                const hoverImg = row.querySelector('.hover-img');
+
+                const onImageLoad = () => {
+                    setHoverImgSize(mainImg, hoverImg, row);
+                    mainImg.removeEventListener('load', onImageLoad);
+                };
+
+                if (mainImg.complete) {
+                    setHoverImgSize(mainImg, hoverImg, row);
+                } else {
+                    mainImg.addEventListener('load', onImageLoad);
+                }
+
+                row.addEventListener('mouseenter', () => {
+                    setHoverImgSize(mainImg, hoverImg, row);
+                    hoverImg.style.opacity = 1;
+                });
+
+                row.addEventListener('mouseleave', () => {
+                    hoverImg.style.opacity = 0;
+                });
+
+                // 在页面加载和窗口大小改变时设置悬停图片的尺寸
+                window.addEventListener('load', () => setHoverImgSize(mainImg, hoverImg, row));
+                window.addEventListener('resize', () => setHoverImgSize(mainImg, hoverImg, row));
+            });
+        }
+    });
 </script>
 </html>
 

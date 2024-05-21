@@ -260,6 +260,10 @@ h2:not(+ .h2-tagline) {
     opacity: 1;
 }
 
+.project-row.in-view .hover-img {
+    opacity: 1;
+}
+
 .project-row a {
     width: 48%; /* 设置链接宽度为容器的48% */
     display: block; /* 确保链接是块级元素 */
@@ -508,6 +512,8 @@ footer a:hover {
 
     .project-row .project-description {
         text-align: center; /* 文本居中对齐 */
+        white-space: nowrap; /* 强制文本在一行内显示 */
+        width: 100%; /* 确保容器宽度为100% */
     }
 
     .main-img {
@@ -524,8 +530,18 @@ footer a:hover {
     .project-row.reverse .project-description {
         text-align: center; /* 在reverse类下文本靠右对齐 */
     }
+    .learn-more-btn {
+        padding: 20px 60px; /* 增大按钮的内边距 */
+        font-size: 18px; /* 增大按钮内字体的大小 */
+    }
     .video-container video {
         width: 100%; /* 视频宽度，根据需要调整 */
+    }
+    /* 停用手机端的悬停效果 */
+    @media (hover: none) and (pointer: coarse) {
+        .project-row:hover .hover-img {
+            opacity: 0;
+        }
     }
 
 }
