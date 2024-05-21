@@ -513,7 +513,8 @@ footer a:hover {
     .project-row .project-description {
         text-align: center; /* 文本居中对齐 */
         white-space: nowrap; /* 强制文本在一行内显示 */
-        width: 100%; /* 确保容器宽度为100% */
+        width: auto; /* 确保容器宽度不会超过视口宽度 */
+        max-width: 100%; /* 确保容器宽度不会超过视口宽度 */
     }
 
     .main-img {
@@ -537,11 +538,14 @@ footer a:hover {
     .video-container video {
         width: 100%; /* 视频宽度，根据需要调整 */
     }
-    /* 停用手机端的悬停效果 */
-    @media (hover: none) and (pointer: coarse) {
-        .project-row:hover .hover-img {
-            opacity: 0;
-        }
-    }
+    #fullscreen-image {
+        object-position: 42% center; /* 向右移动图片内容 */
+    }    
+}
 
+/* 停用手机端的悬停效果 */
+@media (hover: none) and (pointer: coarse) {
+    .project-row:hover .hover-img {
+        opacity: 0;
+    }
 }
