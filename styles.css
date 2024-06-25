@@ -4,6 +4,7 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
 }
 /* 检测iOS系统并应用苹果字体 */
 @supports (-webkit-touch-callout: none) {
@@ -232,7 +233,7 @@ h2:not(+ .h2-tagline) {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px; /* 添加适当的间距 */
+    margin-bottom: 80px; /* 添加适当的间距 */
     font-size: 20px;
     padding: 0 2%; /* 添加左右内边距，使图片向中间拓宽一点点 */
     position: relative;
@@ -359,7 +360,7 @@ section {
     align-items: center;
     flex-direction: column;
     justify-content: space-around;
-    padding-top: 15%;
+    padding-top: 14%;
 }
 
 section h2 {
@@ -507,6 +508,49 @@ footer a:hover {
     margin-right: 5px; /* 调整图标和文本之间的间距 */
 }
 
+
+.fade-in-left, .fade-in-right, .fade-in-up {
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.4, 0.0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.fade-in-left {
+    transform: translateX(-30px);
+}
+
+.fade-in-right {
+    transform: translateX(30px);
+}
+
+.fade-in-up {
+    transform: translateY(30px);
+    
+}
+
+.fade-in-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-left.is-visible, 
+.fade-in-right.is-visible {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+}
+
+.fade-in-up-center {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 20px));
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up-center.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+
 /* 使用 @media 查询实现响应式设计 */
 @media (max-aspect-ratio: 4/3) {
     #left-nav {
@@ -580,6 +624,20 @@ footer a:hover {
     }   
     #tagline {
         top: calc(40% + 70px);
+    }
+    /* 左右fade in 效果变成上下 fade in*/
+    .fade-in-left {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        will-change: opacity, transform;
+    }
+    
+    .fade-in-right {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        will-change: opacity, transform;
     }
 }
 
