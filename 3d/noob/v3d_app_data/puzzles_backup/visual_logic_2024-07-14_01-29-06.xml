@@ -1,0 +1,25 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <tab name="Init" type="InitTab" active="false" scrollx="20.000000000000455" scrolly="0" scale="0.9"></tab>
+  <tab name="New Tab" type="CommonTab" active="true" scrollx="20.000000000000455" scrolly="20" scale="0.9">
+    <block xmlns="https://developers.google.com/blockly/xml" type="execScript" id="}b0R)[]*cOjXUHk~b=IM" x="330" y="670">
+      <value name="TEXT">
+        <shadow type="textMultiline" id="v#VpXfW{9V5G|EeN-JL1">
+          <field name="HIGHLIGHT_MODE">javascript</field>
+          <field name="TEXT" editor-height="9" editor-width="520">// 初始设置&amp;#10;app.postprocessing.outlinePass.edgeStrength = 20;&amp;#10;app.postprocessing.outlinePass.edgeGlow = 0;&amp;#10;app.postprocessing.outlinePass.edgeThickness = 0.1;&amp;#10;app.postprocessing.outlinePass.pulsePeriod = 0;&amp;#10;app.postprocessing.outlinePass.overlayMaterial.blending = v3d.CustomBlending;&amp;#10;&amp;#10;</field>
+        </shadow>
+      </value>
+      <next>
+        <block type="outline" id="`H-kB3s-(QsR6LwA2|w/">
+          <field name="DO_WHAT">ENABLE</field>
+          <value name="TARGET">
+            <shadow type="objectList" id="=::CA#^Qw38-O52AYU0|">
+              <field name="FIELDNAME">&lt;none&gt;</field>
+            </shadow>
+            <block type="allObjectList" id=":1a%*DA5M;SK%!Ja#Kr|"></block>
+          </value>
+        </block>
+      </next>
+    </block>
+  </tab>
+  <editorsettings viewport-x="1518" viewport-y="37" viewport-w="1024" viewport-h="635.5" viewport-hidden="false" toolbox-library-mode="false" toolbox-minimized-mode="false"></editorsettings>
+</xml>
