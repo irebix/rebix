@@ -7,7 +7,7 @@ window.addEventListener('load', e => {
     createApp({
         containerId: 'v3d-container',
         fsButtonId: 'fullscreen-button',
-        sceneURL: params.load || 'noob.gltf',
+        sceneURL: params.load || 'https://oss.rebix.cn/3d/noob/noob.gltf',
         logicURL: params.logic || 'visual_logic.js',
     });
 });

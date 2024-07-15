@@ -7,7 +7,7 @@ window.addEventListener('load', e => {
     createApp({
         containerId: 'v3d-container',
         fsButtonId: 'fullscreen-button',
-        sceneURL: params.load || 'slime.gltf',
+        sceneURL: params.load || 'https://oss.rebix.cn/3d/slime/slime.gltf',
         logicURL: params.logic || 'visual_logic.js',
     });
 });
