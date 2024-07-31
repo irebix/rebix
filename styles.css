@@ -24,14 +24,7 @@ header {
     overflow: hidden;
     /* 确保超出部分不显示 */
 }
-.filter{
-    /* filter: blur(50px); */
-    overflow: hidden;
-    border-radius: 20px;
-}
-.filter>img{
-    filter: blur(50px);
-}
+
 .h2-tagline {
     color: #666;
     /* 设置字体颜色 */
@@ -493,7 +486,7 @@ img {
     /* 防止用户选择图片 */
     pointer-events: none;
     /* 防止鼠标事件影响图片 */
-
+    margin-top: 60px;
 }
 
 #image-preview {
@@ -770,7 +763,7 @@ footer a:hover {
     }
 
     #fullscreen-image {
-        object-position: 42% center;
+        object-position: 60% center;
         /* 向右移动图片内容 */
     }
 

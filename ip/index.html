@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP访问</title>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 10px;
+                background-color: #f4f4f4;
+            }
+    
+            .container {
+                max-width: 100%;
+                margin: 0 auto;
+                background-color: #fff;
+                padding: 15px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+    
+            h1 {
+                color: #333;
+                text-align: center;
+                font-size: 1.5em;
+            }
+    
+            #ipTable {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 15px;
+                font-size: 0.9em;
+            }
+    
+            #ipTable th,
+            #ipTable td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+                word-break: break-word;
+            }
+    
+            #ipTable th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+    
+            #ipTable tr:hover {
+                background-color: #f5f5f5;
+            }
+    
+            .pagination {
+                display: flex;
+                justify-content: center;
+                margin-top: 15px;
+            }
+    
+            .pagination button {
+                margin: 0 5px;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+    
+            #errorMessage {
+                color: red;
+                text-align: center;
+                margin-top: 10px;
+            }
+            .pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+            }
+
+            .pagination button, .pagination span {
+                margin: 0 5px;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                background-color: #f8f8f8;
+                color: #333;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .pagination button:hover {
+                background-color: #e8e8e8;
+            }
+
+            .pagination button:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            .pagination .current-page {
+                font-weight: bold;
+                background-color: #4CAF50;
+                color: white;
+                border-color: #4CAF50;
+            }
+
+            .pagination .ellipsis {
+                padding: 8px 12px;
+                color: #888;
+            }
+    
+            @media (max-width: 600px) {
+                #ipTable {
+                    font-size: 0.8em;
+                }
+    
+                #ipTable th,
+                #ipTable td {
+                    padding: 6px;
+                }
+    
+                .pagination button, .pagination span {
+                    padding: 6px 10px;
+                    font-size: 12px;
+                }
+            }
+        </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>IP</h1>
+        <div id="errorMessage"></div>
+        <table id="ipTable">
+            <thead>
+                <tr>
+                    <th>IP地址</th>
+                    <th>访问时间</th>
+                    <th>状态码</th>
+                    <th>请求路径</th>
+                    <th>用户代理</th>
+                </tr>
+            </thead>
+            <tbody id="ipTableBody">
+                <!-- 数据将通过JavaScript动态填充 -->
+            </tbody>
+        </table>
+        <div class="pagination">
+            <button id="prevPage">上一页</button>
+            <span id="currentPage">1</span>
+            <button id="nextPage">下一页</button>
+        </div>
+    </div>
+
+    <script>
+        // 安全性增强：输入验证和净化函数
+        function sanitizeInput(input) {
+            return input.replace(/[&<>"']/g, function (m) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[m]
+            });
+        }
+
+        // 安全性增强：错误处理函数
+        function displayErrorMessage(message) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = message;
+        }
+
+        // 安全性增强：检查用户权限
+        function checkUserPermission() {
+            // 实现您的权限检查逻辑
+            // 这里仅作示例，实际应用中应该与后端进行验证
+            const userHasPermission = true; // 假设用户有权限
+            if (!userHasPermission) {
+                window.location.href = '/unauthorized.html';
+            }
+        }
+
+        // 安全性增强：使用async/await和错误处理
+        async function fetchIPData(page = 1) {
+            try {
+                // 在实际应用中，这里应该是一个真实的API调用
+                const response = await fetch(`/api/ip-logs?page=${page}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+
+                // 过滤数据
+                const filteredData = data.data.filter(item => {
+                    const parsedItem = parseLogLine(item);
+                    return !(parsedItem.request === 'GET /ip/ HTTP/1.1' || 
+                            /GET \/api\/ip-logs\?page=\d+ HTTP\/1\.1/.test(parsedItem.request));
+                });
+
+                return { data: filteredData, totalPages: data.totalPages };
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                displayErrorMessage('获取数据时发生错误，请稍后再试。');
+                return { data: [], totalPages: 0 };
+            }
+        }
+
+        // 安全性增强：使用textContent而不是innerHTML
+        // 修改 parseLogLine 函数
+        function parseLogLine(line) {
+            const ipRegex = /^(\S+)/;
+            const timeRegex = /\[([^\]]+)\]/;
+            const requestRegex = /"([^"]*)"/;
+            const statusRegex = /" (\d{3}) /;
+            const bytesRegex = / (\d+) /;
+            const refererRegex = /"([^"]*)" "([^"]*)" "([^"]*)"$/;
+
+            const ipMatch = line.match(ipRegex);
+            const timeMatch = line.match(timeRegex);
+            const requestMatch = line.match(requestRegex);
+            const statusMatch = line.match(statusRegex);
+            const bytesMatch = line.match(bytesRegex);
+            const refererMatch = line.match(refererRegex);
+
+            return {
+                ip: ipMatch ? ipMatch[1] : '',
+                time: timeMatch ? timeMatch[1] : '',
+                request: requestMatch ? requestMatch[1] : '',
+                status: statusMatch ? parseInt(statusMatch[1], 10) : '',
+                bytes: bytesMatch ? parseInt(bytesMatch[1], 10) : '',
+                referer: refererMatch ? refererMatch[1] : '',
+                userAgent: refererMatch ? refererMatch[2] : '',
+                other: refererMatch ? refererMatch[3] : ''
+            };
+        }
+
+        // 修改 renderTable 函数
+        function renderTable(data) {
+            const tableBody = document.getElementById('ipTableBody');
+            tableBody.innerHTML = ''; // 清空现有内容
+
+            // 过滤数据
+            const filteredData = data.filter(item => {
+                const parsedItem = parseLogLine(item);
+                return !(parsedItem.request === 'GET /ip/ HTTP/1.1' || 
+                        /GET \/api\/ip-logs\?page=\d+ HTTP\/1\.1/.test(parsedItem.request));
+            });
+
+            // 渲染过滤后的数据
+            filteredData.forEach(item => {
+                const parsedItem = parseLogLine(item);
+
+                const row = document.createElement('tr');
+                ['ip', 'time', 'status', 'request', 'userAgent'].forEach(key => {
+                    const cell = document.createElement('td');
+                    if (key === 'ip') {
+                        cell.innerHTML = `<a target="_blank" href="http://ip-api.com/json/${parsedItem[key]}?lang=zh-CN">${parsedItem[key]}</a>` || "";
+                    } else {
+                        cell.textContent = parsedItem[key] || "";
+                    }
+                    row.appendChild(cell);
+                });
+                tableBody.appendChild(row);
+            });
+        }
+        // 解析日志行
+        function parseLogLine(line) {
+            const ipRegex = /^(\S+)/;
+            const timeRegex = /\[([^\]]+)\]/;
+            const requestRegex = /"([^"]*)"/;
+            const statusRegex = /" (\d{3}) /;
+            const bytesRegex = / (\d+) /;
+            const refererRegex = /"([^"]*)" "([^"]*)" "([^"]*)"$/;
+
+            const ipMatch = line.match(ipRegex);
+            const timeMatch = line.match(timeRegex);
+            const requestMatch = line.match(requestRegex);
+            const statusMatch = line.match(statusRegex);
+            const bytesMatch = line.match(bytesRegex);
+            const refererMatch = line.match(refererRegex);
+
+            return {
+                ip: ipMatch ? ipMatch[1] : '',
+                time: timeMatch ? timeMatch[1] : '',
+                request: requestMatch ? requestMatch[1] : '',
+                status: statusMatch ? parseInt(statusMatch[1], 10) : '',
+                bytes: bytesMatch ? parseInt(bytesMatch[1], 10) : '',
+                referer: refererMatch ? refererMatch[1] : '',
+                userAgent: refererMatch ? refererMatch[2] : '',
+                other: refererMatch ? refererMatch[3] : ''
+            };
+        }
+
+        // 初始化页面
+        let currentPage = 1;
+        let totalPages = 10; // 假设总页数为10，实际应用中应从API获取
+
+        function updatePagination() {
+            const prevButton = document.getElementById('prevPage');
+            const nextButton = document.getElementById('nextPage');
+            const currentPageSpan = document.getElementById('currentPage');
+
+            prevButton.disabled = currentPage === 1;
+            nextButton.disabled = currentPage === totalPages;
+            currentPageSpan.textContent = currentPage;
+        }
+
+        // 处理翻页
+        async function changePage(newPage) {
+            if (newPage < 1 || newPage > totalPages) return;
+
+            currentPage = newPage;
+            try {
+                const data = await fetchIPData(currentPage);
+                renderTable(data.data);
+                updatePagination();
+            } catch (error) {
+                console.error('Error changing page:', error);
+                displayErrorMessage('切换页面时发生错误，请重试。');
+            }
+        }
+
+        // 添加事件监听器
+        document.getElementById('prevPage').addEventListener('click', () => changePage(currentPage - 1));
+        document.getElementById('nextPage').addEventListener('click', () => changePage(currentPage + 1));
+
+        // 修改 initPage 函数
+        async function initPage() {
+            try {
+                const data = await fetchIPData(currentPage);
+                renderTable(data.data);
+                totalPages = data.totalPages; // 更新总页数
+                updatePagination();
+            } catch (error) {
+                console.error('Error initializing page:', error);
+                displayErrorMessage('初始化页面时发生错误，请刷新页面重试。');
+            }
+        }
+
+        // 页面加载时初始化
+        window.onload = () => {
+            checkUserPermission();
+            initPage();
+        };
+    </script>
+</body>
+
+</html>
