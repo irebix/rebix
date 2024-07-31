@@ -6,6 +6,7 @@ body {
     height: 100%;
     overflow-x: hidden;
 }
+
 /* 检测iOS系统并应用苹果字体 */
 @supports (-webkit-touch-callout: none) {
     body {
@@ -20,17 +21,30 @@ header {
     width: 100%;
     height: 100vh;
     position: relative;
-    overflow: hidden; /* 确保超出部分不显示 */
+    overflow: hidden;
+    /* 确保超出部分不显示 */
 }
-
+.filter{
+    /* filter: blur(50px); */
+    overflow: hidden;
+    border-radius: 20px;
+}
+.filter>img{
+    filter: blur(50px);
+}
 .h2-tagline {
-    color: #666; /* 设置字体颜色 */
-    font-size: 20px; /* 设置字体大小 */
-    margin-top: 5px; /* 在h2下方留出2像素的间隔 */
-    text-align: center; /* 文本居中 */
+    color: #666;
+    /* 设置字体颜色 */
+    font-size: 20px;
+    /* 设置字体大小 */
+    margin-top: 5px;
+    /* 在h2下方留出2像素的间隔 */
+    text-align: center;
+    /* 文本居中 */
     width: fit-content;
 }
-.h2-tagline::after{
+
+.h2-tagline::after {
     content: '';
     background-color: #666;
 
@@ -43,13 +57,17 @@ header {
 }
 
 .h2-tagline a {
-    color: inherit; /* 继承父元素的颜色 */
-    text-decoration: none; /* 去除下划线 */
+    color: inherit;
+    /* 继承父元素的颜色 */
+    text-decoration: none;
+    /* 去除下划线 */
 }
 
 .h2-tagline a:hover {
-    color: #555; /* 悬停时的颜色，可以根据需要调整 */
-    text-decoration: none; /* 悬停时也去除下划线 */
+    color: #555;
+    /* 悬停时的颜色，可以根据需要调整 */
+    text-decoration: none;
+    /* 悬停时也去除下划线 */
     cursor: pointer;
 }
 
@@ -58,18 +76,22 @@ h1 {
     color: white;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);   
+    transform: translate(-50%, -50%);
     font-size: 70px;
-    letter-spacing: 4px; /* 增加字间距 */
+    letter-spacing: 4px;
+    /* 增加字间距 */
     z-index: 1;
-    text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5); /* 添加阴影效果 */
+    text-shadow: 8px 8px 24px rgba(0, 0, 0, 0.6);
+    /* 添加阴影效果 */
 }
 
 h2 {
     font-size: 50px;
-    letter-spacing: 0; /* 增加字间距 */
-    margin: 0; /* 移除默认边距 */
-    padding:0; 
+    letter-spacing: 0;
+    /* 增加字间距 */
+    margin: 0;
+    /* 移除默认边距 */
+    padding: 0;
 }
 
 /* 选择没有兄弟元素.h2-tagline的h2 */
@@ -78,7 +100,8 @@ h2:not(+ .h2-tagline) {
     margin-bottom: 120px;
 }
 
-.h2-tagline,h2{
+.h2-tagline,
+h2 {
     position: relative;
 }
 
@@ -92,47 +115,72 @@ h2:not(+ .h2-tagline) {
     text-align: center;
     font-size: 25px;
     z-index: 1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    /* 添加阴影效果 */
 }
 
 @keyframes floatArrow {
-    0%, 100% {
-        transform: translateY(0); /* 开始和结束时回到原位 */
+
+    0%,
+    100% {
+        transform: translateY(0);
+        /* 开始和结束时回到原位 */
     }
+
     50% {
-        transform: translateY(10px); /* 向下移动10像素 */
+        transform: translateY(10px);
+        /* 向下移动10像素 */
     }
 }
 
 #down-arrow {
     position: absolute;
-    bottom: 10%; /* 距离底部10%的距离 */
-    left: 50%; /* 水平居中 */
-    transform: translateX(-50%); /* 精确居中 */
-    width: 0; /* 宽度为0 */
-    height: 0; /* 高度为0 */
-    border-left: 20px solid transparent; /* 左边框透明 */
-    border-right: 18px solid transparent; /* 右边框透明 */
-    border-top: 18px solid white; /* 上边框白色，形成三角形 */
-    z-index: 3; /* 确保在最上层显示 */
-    animation: floatArrow 2s ease-in-out infinite; /* 应用动画 */
-    cursor:pointer;
-    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* 添加阴影效果 */
+    bottom: 10%;
+    /* 距离底部10%的距离 */
+    left: 50%;
+    /* 水平居中 */
+    transform: translateX(-50%);
+    /* 精确居中 */
+    width: 0;
+    /* 宽度为0 */
+    height: 0;
+    /* 高度为0 */
+    border-left: 20px solid transparent;
+    /* 左边框透明 */
+    border-right: 18px solid transparent;
+    /* 右边框透明 */
+    border-top: 18px solid white;
+    /* 上边框白色，形成三角形 */
+    z-index: 3;
+    /* 确保在最上层显示 */
+    animation: floatArrow 2s ease-in-out infinite;
+    /* 应用动画 */
+    cursor: pointer;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+    /* 添加阴影效果 */
 
 }
 
 #main-nav {
-    background-color: rgba(235, 235, 235, 0.8); /* 设置半透明背景 */
-    backdrop-filter: blur(15px); /* 添加毛玻璃效果 */
-    position: fixed; /* 固定在页面顶部 */
+    background-color: rgba(235, 235, 235, 0.8);
+    /* 设置半透明背景 */
+    backdrop-filter: blur(15px);
+    /* 添加毛玻璃效果 */
+    position: fixed;
+    /* 固定在页面顶部 */
     top: 0;
     left: 0;
-    width: 100%; /* 占满整个页面宽度 */
-    z-index: 20; /* 确保在最上层显示 */
+    width: 100%;
+    /* 占满整个页面宽度 */
+    z-index: 20;
+    /* 确保在最上层显示 */
     display: flex;
-    justify-content: space-between; /* 左右分布 */
-    align-items: center; /* 垂直居中对齐 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    justify-content: space-between;
+    /* 左右分布 */
+    align-items: center;
+    /* 垂直居中对齐 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* 添加阴影效果 */
 }
 
 #right-nav {
@@ -140,24 +188,29 @@ h2:not(+ .h2-tagline) {
     position: absolute;
     padding-right: 10px;
     right: 25%;
-    z-index: 3; /* 确保导航栏在最上层 */
-    font-size: 15px; 
+    z-index: 3;
+    /* 确保导航栏在最上层 */
+    font-size: 15px;
     cursor: pointer;
 }
 
 #right-nav a {
-    color: inherit; /* 链接颜色继承父元素颜色 */
-    text-decoration: none; /* 去除下划线 */
+    color: inherit;
+    /* 链接颜色继承父元素颜色 */
+    text-decoration: none;
+    /* 去除下划线 */
 }
 
 #right-nav a:hover {
-    color: #555; /* 悬停时的颜色，可以根据需要调整 */
+    color: #555;
+    /* 悬停时的颜色，可以根据需要调整 */
 }
 
 #right-nav ul li {
     display: inline;
     margin-left: 15px;
-    margin-right: 15px; /* 增加右边距 */
+    margin-right: 15px;
+    /* 增加右边距 */
 }
 
 #left-nav {
@@ -177,26 +230,35 @@ h2:not(+ .h2-tagline) {
 }
 
 #project {
-    padding-top: 10%; /* 将顶部的 padding 缩短 10% */
+    padding-top: 10%;
+    /* 将顶部的 padding 缩短 10% */
 }
 
 .project-container {
     margin-top: 5%;
-    padding: 0; /* 内边距为0，确保左右两边顶格 */
-    width: 100%; /* 宽度为100% */
+    padding: 0;
+    /* 内边距为0，确保左右两边顶格 */
+    width: 100%;
+    /* 宽度为100% */
 }
 
 .project-row .project-description {
-    width: 45%; /* 调整描述宽度，留出间隙 */
-    padding: 10px; /* 添加内边距 */
-    color: inherit; /* 保持描述文字颜色不变 */
-    text-align: left; /* 默认情况下文本靠左对齐 */
-    
+    width: 45%;
+    /* 调整描述宽度，留出间隙 */
+    padding: 10px;
+    /* 添加内边距 */
+    color: inherit;
+    /* 保持描述文字颜色不变 */
+    text-align: left;
+    /* 默认情况下文本靠左对齐 */
+
 }
 
 .learn-more-btn {
-    display: inline-block; /* 使按钮成为行内块元素 */
-    margin-top: 8px; /* 添加顶部间距 */
+    display: inline-block;
+    /* 使按钮成为行内块元素 */
+    margin-top: 8px;
+    /* 添加顶部间距 */
     padding: 15px 50px;
     background-color: #816256;
     color: white;
@@ -204,43 +266,53 @@ h2:not(+ .h2-tagline) {
     border-radius: 30px;
     cursor: pointer;
     font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 按钮的阴影效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* 按钮的阴影效果 */
 }
 
 .learn-more-btn:hover {
-    background-color: #5a443c;;
+    background-color: #5a443c;
+    ;
 }
 
 #right-nav a:hover {
-    color: #555; /* 悬停时的颜色，可以根据需要调整 */
+    color: #555;
+    /* 悬停时的颜色，可以根据需要调整 */
 }
 
 .project-description p:first-child {
-    font-size: 35px; /* 第一行字体较大 */
+    font-size: 35px;
+    /* 第一行字体较大 */
     font-weight: 600;
-    margin-bottom: 10px; /* 增加与第二行的间距 */
+    margin-bottom: 10px;
+    /* 增加与第二行的间距 */
 }
 
 .project-description p:last-child {
-    font-size: 20px; /* 第二行字体较小 */
+    font-size: 20px;
+    /* 第二行字体较小 */
 }
 
 .project-row.reverse .project-description {
-    text-align: right; /* 在reverse类下文本靠右对齐 */
+    text-align: right;
+    /* 在reverse类下文本靠右对齐 */
 }
 
 .project-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 80px; /* 添加适当的间距 */
+    margin-bottom: 80px;
+    /* 添加适当的间距 */
     font-size: 20px;
-    padding: 0 2%; /* 添加左右内边距，使图片向中间拓宽一点点 */
+    padding: 0 2%;
+    /* 添加左右内边距，使图片向中间拓宽一点点 */
     position: relative;
 }
 
 .main-img {
-    width: 48%; /* 调整图片宽度 */
+    width: 48%;
+    /* 调整图片宽度 */
     height: auto;
     display: block;
 }
@@ -252,8 +324,9 @@ h2:not(+ .h2-tagline) {
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 0.3s ease-in-out; 
-    object-fit: cover; /* 确保图片覆盖容器 */
+    transition: opacity 0.3s ease-in-out;
+    object-fit: cover;
+    /* 确保图片覆盖容器 */
 }
 
 .project-row:hover .hover-img {
@@ -265,74 +338,100 @@ h2:not(+ .h2-tagline) {
 }
 
 .project-row a {
-    width: 48%; /* 设置链接宽度为容器的48% */
-    display: block; /* 确保链接是块级元素 */
-    margin: 0; /* 移除外边距 */
-    padding: 0; /* 移除内边距 */
-    text-decoration: none; /* 去除下划线 */
+    width: 48%;
+    /* 设置链接宽度为容器的48% */
+    display: block;
+    /* 确保链接是块级元素 */
+    margin: 0;
+    /* 移除外边距 */
+    padding: 0;
+    /* 移除内边距 */
+    text-decoration: none;
+    /* 去除下划线 */
 }
 
 .project-row img {
-    width: 100%; /* 图片宽度设置为100% */
-    height: auto; /* 高度自动，保持图片比例 */
-    display: block; /* 确保图片是块级元素 */
-    margin: 0; /* 移除外边距 */
-    padding: 0; /* 移除内边距 */
+    width: 100%;
+    /* 图片宽度设置为100% */
+    height: auto;
+    /* 高度自动，保持图片比例 */
+    display: block;
+    /* 确保图片是块级元素 */
+    margin: 0;
+    /* 移除外边距 */
+    padding: 0;
+    /* 移除内边距 */
     cursor: pointer;
 }
 
 .project-row.reverse {
-    flex-direction: row-reverse; /* 反转顺序 */
+    flex-direction: row-reverse;
+    /* 反转顺序 */
 }
 
 /* 检测屏幕宽度是否小于等于768px（常见的移动端宽度） */
 
 
 .video-container {
-    text-align: center; /* 使容器内的内容居中 */
-    padding: 5%; /* 添加适当的内边距 */
-    margin-bottom: 35px; /* 在容器底部添加间距 */
+    text-align: center;
+    /* 使容器内的内容居中 */
+    padding: 5%;
+    /* 添加适当的内边距 */
+    margin-bottom: 35px;
+    /* 在容器底部添加间距 */
 }
 
 .video-container video {
-    width: 80%; /* 视频宽度，根据需要调整 */
-    height: auto; /* 保持视频的原始比例 */
-    margin: 0 auto; /* 水平居中视频 */
+    width: 80%;
+    /* 视频宽度，根据需要调整 */
+    height: auto;
+    /* 保持视频的原始比例 */
+    margin: 0 auto;
+    /* 水平居中视频 */
     border-radius: 20px;
 }
 
 .tool-description {
-    text-align: center; /* 描述文字居中对齐 */
-    padding-top: 10px; /* 在描述文字的顶部添加一些间距 */
+    text-align: center;
+    /* 描述文字居中对齐 */
+    padding-top: 10px;
+    /* 在描述文字的顶部添加一些间距 */
 }
 
 .tool-description p:first-child {
-    font-size: 35px; /* 第一行字体较大 */
-    margin-bottom: 50px; /* 增加与第二行的间距 */
+    font-size: 35px;
+    /* 第一行字体较大 */
+    margin-bottom: 50px;
+    /* 增加与第二行的间距 */
     font-weight: 600;
 }
 
 .tool-description p:last-child {
     padding: 1px;
-    font-size: 16px; /* 第二行字体较小 */
+    font-size: 16px;
+    /* 第二行字体较小 */
 }
 
 .img-gallery {
     --vgap: 0.2vw;
     --hgap: 1vh;
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between; /* 保持元素之间的间距 */
-    width: 100%; /* 容器宽度为100% */
-    gap: var(--hgap) var(--vgap); 
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* 保持元素之间的间距 */
+    width: 100%;
+    /* 容器宽度为100% */
+    gap: var(--hgap) var(--vgap);
     margin: 5% 0;
 }
-.img-gallery > .img-gallery {
+
+.img-gallery>.img-gallery {
     margin: 0;
 }
 
 .img-gallery a {
-    box-sizing: border-box; /* 包括padding和border在内的总宽度 */
+    box-sizing: border-box;
+    /* 包括padding和border在内的总宽度 */
     display: block;
 }
 
@@ -346,16 +445,21 @@ h2:not(+ .h2-tagline) {
 
 
 .img-gallery img {
-    width: 100%; /* 图片宽度自适应容器 */
-    height: auto; /* 高度自动，保持比例 */
-    transition: transform 0.3s ease-in-out; /* 平滑过渡效果 */
-    cursor: zoom-in; /* 鼠标悬停时显示放大镜图标 */
+    width: 100%;
+    /* 图片宽度自适应容器 */
+    height: auto;
+    /* 高度自动，保持比例 */
+    transition: transform 0.3s ease-in-out;
+    /* 平滑过渡效果 */
+    cursor: zoom-in;
+    /* 鼠标悬停时显示放大镜图标 */
 }
 
 section {
     /* width: 100%;  */
     box-sizing: content-box;
-    text-align: center; /* 文本居中 */
+    text-align: center;
+    /* 文本居中 */
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -375,16 +479,20 @@ img {
 }
 
 #fullscreen-image {
-    width: 100vw; /* 视口宽度 */
-    height: 100vh; /* 视口高度 */
+    width: 100vw;
+    /* 视口宽度 */
+    height: 100vh;
+    /* 视口高度 */
     object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
     margin: 0;
     z-index: 0;
-    user-select: none; /* 防止用户选择图片 */
-    pointer-events: none; /* 防止鼠标事件影响图片 */
+    user-select: none;
+    /* 防止用户选择图片 */
+    pointer-events: none;
+    /* 防止鼠标事件影响图片 */
 
 }
 
@@ -394,7 +502,8 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: hsla(0, 0%, 0%, 0.80); /* 50% 不透明度的黑色背景 */
+    background-color: hsla(0, 0%, 0%, 0.80);
+    /* 50% 不透明度的黑色背景 */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -423,10 +532,11 @@ img {
 }
 
 #left-arrow {
-    padding: 40px; 
+    padding: 40px;
     margin: -40px;
     position: fixed;
-    left: 5%;  /* 从左边缘向内偏移10% */
+    left: 5%;
+    /* 从左边缘向内偏移10% */
     top: 50%;
     transform: translateY(-50%);
     font-size: 30px;
@@ -436,10 +546,11 @@ img {
 }
 
 #right-arrow {
-    padding: 40px; 
+    padding: 40px;
     margin: -40px;
     position: fixed;
-    right: 5%;  /* 从右边缘向内偏移10% */
+    right: 5%;
+    /* 从右边缘向内偏移10% */
     top: 50%;
     transform: translateY(-50%);
     font-size: 30px;
@@ -466,14 +577,17 @@ footer {
 footer p {
     margin: 0;
     padding: 0;
-    line-height: 1.8; /* 增加行间距 */
+    line-height: 1.8;
+    /* 增加行间距 */
 }
 
 footer .footer-content {
     display: flex;
     align-items: center;
-    gap: 10px; /* 调整图标和文本之间的间距 */
-    padding-bottom: 1px; /* 增加与下方内容的间距 */
+    gap: 10px;
+    /* 调整图标和文本之间的间距 */
+    padding-bottom: 1px;
+    /* 增加与下方内容的间距 */
 }
 
 footer a {
@@ -482,7 +596,8 @@ footer a {
 }
 
 footer a:hover {
-    color: #888; /* 悬停时改变颜色 */
+    color: #888;
+    /* 悬停时改变颜色 */
 }
 
 .beian-info {
@@ -492,7 +607,8 @@ footer a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px; /* 调整图标和文本之间的间距 */
+    gap: 10px;
+    /* 调整图标和文本之间的间距 */
 }
 
 .beian-info a {
@@ -503,16 +619,21 @@ footer a:hover {
 }
 
 .beian-icon {
-    width: 12px; /* 调整图标的宽度 */
-    height: 12px; /* 调整图标的高度 */
-    margin-right: 5px; /* 调整图标和文本之间的间距 */
+    width: 12px;
+    /* 调整图标的宽度 */
+    height: 12px;
+    /* 调整图标的高度 */
+    margin-right: 5px;
+    /* 调整图标和文本之间的间距 */
 }
 
 
-.fade-in-left, .fade-in-right, .fade-in-up {
+.fade-in-left,
+.fade-in-right,
+.fade-in-up {
     opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.4, 0.0, 0.2, 1), 
-                transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition: opacity 0.8s cubic-bezier(0.4, 0.0, 0.2, 1),
+        transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
     will-change: opacity, transform;
 }
 
@@ -526,7 +647,7 @@ footer a:hover {
 
 .fade-in-up {
     transform: translateY(30px);
-    
+
 }
 
 .fade-in-up.is-visible {
@@ -534,7 +655,7 @@ footer a:hover {
     transform: translateY(0);
 }
 
-.fade-in-left.is-visible, 
+.fade-in-left.is-visible,
 .fade-in-right.is-visible {
     opacity: 1;
     transform: translateX(0) translateY(0);
@@ -557,74 +678,110 @@ footer a:hover {
         padding-left: 0;
         font-size: 25px;
     }
+
     #right-nav {
-        font-size: 18px; 
-        right: 0; /* 页面宽度的15% */
+        font-size: 18px;
+        right: 0;
+        /* 页面宽度的15% */
     }
+
     .img-gallery {
-        flex-direction: column; /* 将子元素排列改为竖直排列 */
-        align-items: center; /* 子元素在交叉轴上居中对齐 */
+        flex-direction: column;
+        /* 将子元素排列改为竖直排列 */
+        align-items: center;
+        /* 子元素在交叉轴上居中对齐 */
         gap: 10px;
     }
 
     .img-gallery a {
-        width: 100%; /* 调整宽度以适应竖屏显示 */
+        width: 100%;
+        /* 调整宽度以适应竖屏显示 */
     }
 
     #project {
-        padding-top: 25%; /* 将顶部的 padding 缩短 10% */
+        padding-top: 25%;
+        /* 将顶部的 padding 缩短 10% */
     }
+
     .project-container {
         display: block;
-        flex-direction: column; /* 使项目竖直排列 */
-        align-items: center; /* 居中对齐 */
+        flex-direction: column;
+        /* 使项目竖直排列 */
+        align-items: center;
+        /* 居中对齐 */
     }
 
     .project-row {
-        flex-direction: column; /* 使项目竖直排列 */
-        align-items: center; /* 居中对齐 */
-        margin-bottom: 120px; /* 添加适当的间距 */
-        width: 100%; /* 调整项目宽度 */
-        padding: 0; /* 移除内边距 */
+        flex-direction: column;
+        /* 使项目竖直排列 */
+        align-items: center;
+        /* 居中对齐 */
+        margin-bottom: 120px;
+        /* 添加适当的间距 */
+        width: 100%;
+        /* 调整项目宽度 */
+        padding: 0;
+        /* 移除内边距 */
     }
 
     .project-row .project-description {
-        text-align: center; /* 文本居中对齐 */
-        white-space: nowrap; /* 强制文本在一行内显示 */
-        width: auto; /* 确保容器宽度不会超过视口宽度 */
-        max-width: 100%; /* 确保容器宽度不会超过视口宽度 */
+        text-align: center;
+        /* 文本居中对齐 */
+        white-space: nowrap;
+        /* 强制文本在一行内显示 */
+        width: auto;
+        /* 确保容器宽度不会超过视口宽度 */
+        max-width: 100%;
+        /* 确保容器宽度不会超过视口宽度 */
     }
 
     .main-img {
-        width: 100%; /* 调整图片宽度 */
-        margin-bottom: 10px; /* 添加图片与描述之间的间距 */
+        width: 100%;
+        /* 调整图片宽度 */
+        margin-bottom: 10px;
+        /* 添加图片与描述之间的间距 */
     }
 
     .project-row a {
-        width: 100%; /* 设置链接宽度为容器的100% */
+        width: 100%;
+        /* 设置链接宽度为容器的100% */
     }
+
     .project-row.reverse {
-        flex-direction: column; /* 使项目竖直排列 */
+        flex-direction: column;
+        /* 使项目竖直排列 */
     }
+
     .project-row.reverse .project-description {
-        text-align: center; /* 在reverse类下文本靠右对齐 */
+        text-align: center;
+        /* 在reverse类下文本靠右对齐 */
     }
+
     .learn-more-btn {
-        padding: 20px 60px; /* 增大按钮的内边距 */
-        font-size: 18px; /* 增大按钮内字体的大小 */
+        padding: 20px 60px;
+        /* 增大按钮的内边距 */
+        font-size: 18px;
+        /* 增大按钮内字体的大小 */
     }
+
     .video-container video {
-        width: 100%; /* 视频宽度，根据需要调整 */
+        width: 100%;
+        /* 视频宽度，根据需要调整 */
     }
+
     #fullscreen-image {
-        object-position: 42% center; /* 向右移动图片内容 */
+        object-position: 42% center;
+        /* 向右移动图片内容 */
     }
+
     h1 {
         top: 40%;
-    }   
+    }
+
     #tagline {
         top: calc(40% + 70px);
     }
+
     /* 左右fade in 效果变成上下 fade in*/
     .fade-in-left {
         opacity: 0;
@@ -632,7 +789,7 @@ footer a:hover {
         transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         will-change: opacity, transform;
     }
-    
+
     .fade-in-right {
         opacity: 0;
         transform: translateY(30px);

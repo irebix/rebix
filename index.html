@@ -1,159 +1,176 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <!DOCTYPE html>
-    <html lang="zh">
-    <head>
-        <meta charset="UTF-8">
-        <title>马克笔的作品集</title>
-        <link rel="icon" href="https://oss.rebix.cn/img/favicon.png" type="image/png">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-        <link rel="stylesheet" href="styles.css">
-        <link rel="preload" href="https://oss.rebix.cn/img/mainimg.jpg" as="image">
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap"rel="stylesheet"/>
-        <script>
-            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                // Mobile device style: set the viewport to scale the text size
-                const meta = document.createElement('meta');
-                meta.name = 'viewport';
-                meta.content = 'width=device-width, initial-scale=0.65, user-scalable=no';
-                document.getElementsByTagName('head')[0].appendChild(meta);
-            }
-        </script>
-    </head>
-    <body>
-        <nav id="main-nav">
-            <div id="left-nav">
-                <ul>
-                    <li><a id="refresh-page" onclick="window.scrollTo(0, 0); window.location.reload(); return false;">马克笔</a></li>
-                </ul>
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>马克笔的作品集</title>
+    <link rel="icon" href="https://oss.rebix.cn/img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="https://oss.rebix.cn/img/mainimg.jpg" as="image">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <script>
+        if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // Mobile device style: set the viewport to scale the text size
+            const meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, initial-scale=0.65, user-scalable=no';
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
+    </script>
+</head>
+
+<body>
+    <nav id="main-nav">
+        <div id="left-nav">
+            <ul>
+                <li><a id="refresh-page"
+                        onclick="window.scrollTo(0, 0); window.location.reload(); return false;">马克笔</a></li>
+            </ul>
+        </div>
+        <div id="right-nav">
+            <ul>
+                <li><a class="scroll-link" data-target="project">游戏项目</a></li>
+                <li><a class="scroll-link" data-target="concept">概念设计</a></li>
+                <li><a class="scroll-link" data-target="illustration">插画设计</a></li>
+                <li><a class="scroll-link" data-target="tools">工具开发</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <h1 class="fade-in-up-center">傅宇帆</h1>
+        <div id="tagline" class="fade-in-up-center">设计 · 编程 · 插画</div>
+        <div id="down-arrow"></div>
+        <img src="https://oss.rebix.cn/img/ji5.jpg" alt="Main Image" id="fullscreen-image"
+            style="filter: brightness(0.9);">
+    </header>
+
+    <section id="project">
+        <h2>游戏项目</h2>
+        <div class="project-container">
+            <div class="project-row">
+                <a href="../elementduel/index.html">
+                    <img src="https://oss.rebix.cn/img/e1.jpg" alt="Project 1" loading="lazy" class="main-img">
+                    <img src="https://oss.rebix.cn/img/e1h.jpg" alt="Project 1 Hover" loading="lazy" class="hover-img">
+                </a>
+                <a href="../elementduel/index.html" class="project-description">
+                    <p>元素对决</p>
+                    <p>独立开发，基于Unity3D的跨平台对战卡牌游戏</p>
+                    <button class="learn-more-btn">在线试玩</button>
+                </a>
             </div>
-            <div id="right-nav">
-                <ul>
-                    <li><a class="scroll-link" data-target="project">游戏项目</a></li>
-                    <li><a class="scroll-link" data-target="concept">概念设计</a></li>
-                    <li><a class="scroll-link" data-target="illustration">插画设计</a></li>
-                    <li><a class="scroll-link" data-target="tools">工具开发</a></li>
-                </ul>
+            <div class="project-row reverse">
+                <a href="../brawlstars/index.html">
+                    <img src="https://oss.rebix.cn/img/bs1.jpg" alt="Project 2" loading="lazy" class="main-img">
+                    <img src="https://oss.rebix.cn/img/bs1h.jpg" alt="Project 2 Hover" loading="lazy" class="hover-img">
+                </a>
+                <a href="../brawlstars/index.html" class="project-description">
+                    <p>荒野乱斗</p>
+                    <p>市场美宣图，漫画</p>
+                    <button class="learn-more-btn">了解更多</button>
+                </a>
             </div>
-        </nav>
-    
-        <header>
-            <h1 class="fade-in-up-center">傅宇帆</h1>
-            <div id="tagline" class="fade-in-up-center">设计 · 编程 · 插画</div>            
-            <div id="down-arrow"></div>
-            <img src="https://oss.rebix.cn/img/mainimg.jpg" alt="Main Image" id="fullscreen-image">
-        </header>
-    
-        <section id="project">
-            <h2>游戏项目</h2>
-            <div class="project-container">
-                <div class="project-row">
-                    <a href="../elementduel/index.html">
-                        <img src="https://oss.rebix.cn/img/e1.jpg" alt="Project 1" loading="lazy" class="main-img">
-                        <img src="https://oss.rebix.cn/img/e1h.jpg" alt="Project 1 Hover" loading="lazy" class="hover-img">
-                    </a>
-                    <a href="../elementduel/index.html" class="project-description">
-                        <p>元素对决</p>
-                        <p>独立开发，基于Unity3D的跨平台对战卡牌游戏</p>
-                        <button class="learn-more-btn">在线试玩</button>
-                    </a>
-                </div>
-                <div class="project-row reverse">
-                    <a href="../brawlstars/index.html">
-                        <img src="https://oss.rebix.cn/img/bs1.jpg" alt="Project 2" loading="lazy" class="main-img">
-                        <img src="https://oss.rebix.cn/img/bs1h.jpg" alt="Project 2 Hover" loading="lazy" class="hover-img">
-                    </a>
-                    <a href="../brawlstars/index.html" class="project-description">
-                        <p>荒野乱斗</p>
-                        <p>市场美宣图，漫画</p>
-                        <button class="learn-more-btn">了解更多</button>                      
-                    </a>
-                </div>
-                <div class="project-row">
-                    <a href="../journey/index.html">
-                        <img src="https://oss.rebix.cn/img/j1.jpg" alt="Project 3" loading="lazy" class="main-img">
-                        <img src="https://oss.rebix.cn/img/j2h.jpg" alt="Project 3 Hover" loading="lazy" class="hover-img">
-                    </a>
-                    <a href="../journey/index.html" class="project-description">
-                        <p>代号：旅程</p>
-                        <p>概念设计，插画设计，资产输出，与引擎工具开发</p>
-                        <button class="learn-more-btn">了解更多</button>
-                    </a>                  
-                </div>
-            </div>
-        </section>
-    
-        <section id="concept">
-            <h2>概念设计</h2>
-            <div class="h2-tagline"><a href="/concept/index.html">查看更多</a></div>
-            <div class="img-gallery">
-                <a class="two-per-row"><img src="https://oss.rebix.cn/img/bs2.jpg" alt="Concept Art 1" loading="lazy"></a>
-                <a class="two-per-row"><img src="https://oss.rebix.cn/img/e2.jpg" alt="Concept Art 2" loading="lazy"></a>         
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/j5.jpg" alt="New Concept Art 1" loading="lazy"></a>
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/j2.jpg" alt="New Concept Art 2" loading="lazy"></a>
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/j11.jpg" alt="New Concept Art 3" loading="lazy"></a>
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/m1.jpg" alt="New Concept Art 4" loading="lazy"></a>
-            </div>
-        </section>
-    
-        <section id="illustration">
-            <h2>插画设计</h2>
-            <div class="h2-tagline"><a href="/illustration/index.html">查看更多</a></div>
-            <div class="img-gallery">
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/ji1.jpg" alt="Concept Art 1" loading="lazy"></a>
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/ji2.jpg" alt="Concept Art 2" loading="lazy"></a>
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/ji3.jpg" alt="New Concept Art 1" loading="lazy"></a>
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/ji5.jpg" alt="New Concept Art 2" loading="lazy"></a>
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/bs7.jpg" alt="New Concept Art 3" loading="lazy"></a>
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/bs10.jpg" alt="New Concept Art 4" loading="lazy"></a>
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/bs3.jpg" alt="New Concept Art 4" loading="lazy"></a>
-                <a class="four-per-row"><img src="https://oss.rebix.cn/img/bs9.jpg" alt="New Concept Art 4" loading="lazy"></a>
-            </div>
-        </section>
-    
-        <section id="tools">
-            <h2>工具开发</h2>
-            <div class="video-container">
-                <video id="tool-demo-video" controls muted src="videos/引擎工具演示1080p.mp4" alt="Tool Demo Video" loading="lazy">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="tool-description">
-                    <p>Unity实时预览PS图层＆一键切换地图</p>
-                    <p>为方便检查武器在实际游戏中的效果，包括渲染分辨率、动作、背景契合度等要素，为目的制作的脚本</p>
-                    <p>主要功能：</p>
-                    <p>1. PS一键保存后，Unity内同步显示修改效果<br>2. 一键切换生态地图，方便对照武器在各生态下效果。<br></p>
-                </div>
-            </div>
-        </section>
-    
-        <!-- 图片预览遮罩层 -->
-        <div id="image-preview" style="display: none;">
-            <div id="preview-container">
-                <img id="preview-image" src="" alt="Image Preview">
-                <div id="left-arrow" class="arrow">&lt;</div>
-                <div id="right-arrow" class="arrow">&gt;</div>
+            <div class="project-row">
+                <a href="../journey/index.html">
+                    <img src="https://oss.rebix.cn/img/j1.jpg" alt="Project 3" loading="lazy" class="main-img">
+                    <img src="https://oss.rebix.cn/img/j2h.jpg" alt="Project 3 Hover" loading="lazy" class="hover-img">
+                </a>
+                <a href="../journey/index.html" class="project-description">
+                    <p>代号：旅程</p>
+                    <p>概念设计，插画设计，资产输出，与引擎工具开发</p>
+                    <button class="learn-more-btn">了解更多</button>
+                </a>
             </div>
         </div>
-    
-        <footer>
-            <div class="footer-content">
-                <p>© 2024 傅宇帆</p>
-                <a href="mailto:irebix@qq.com">irebix@qq.com</a>
+    </section>
+
+    <section id="concept">
+        <h2>概念设计</h2>
+        <div class="h2-tagline"><a href="/concept/index.html">查看更多</a></div>
+        <div class="img-gallery">
+            <a class="two-per-row"><img src="https://oss.rebix.cn/img/bs2.jpg" alt="Concept Art 1" loading="lazy"></a>
+            <a class="two-per-row"><img src="https://oss.rebix.cn/img/e2.jpg" alt="Concept Art 2" loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/j5.jpg" alt="New Concept Art 1"
+                    loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/j2.jpg" alt="New Concept Art 2"
+                    loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/j11.jpg" alt="New Concept Art 3"
+                    loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/m1.jpg" alt="New Concept Art 4"
+                    loading="lazy"></a>
+        </div>
+    </section>
+
+    <section id="illustration">
+        <h2>插画设计</h2>
+        <div class="h2-tagline"><a href="/illustration/index.html">查看更多</a></div>
+        <div class="img-gallery">
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/ji1.jpg" alt="Concept Art 1" loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/ji2.jpg" alt="Concept Art 2" loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/ji3.jpg" alt="New Concept Art 1"
+                    loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/ji5.jpg" alt="New Concept Art 2"
+                    loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/bs7.jpg" alt="New Concept Art 3"
+                    loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/bs10.jpg" alt="New Concept Art 4"
+                    loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/bs3.jpg" alt="New Concept Art 4"
+                    loading="lazy"></a>
+            <a class="four-per-row"><img src="https://oss.rebix.cn/img/bs9.jpg" alt="New Concept Art 4"
+                    loading="lazy"></a>
+        </div>
+    </section>
+
+    <section id="tools">
+        <h2>工具开发</h2>
+        <div class="video-container">
+            <video id="tool-demo-video" controls muted src="videos/引擎工具演示1080p.mp4" alt="Tool Demo Video"
+                loading="lazy">
+                Your browser does not support the video tag.
+            </video>
+            <div class="tool-description">
+                <p>Unity实时预览PS图层＆一键切换地图</p>
+                <p>为方便检查武器在实际游戏中的效果，包括渲染分辨率、动作、背景契合度等要素，为目的制作的脚本</p>
+                <p>主要功能：</p>
+                <p>1. PS一键保存后，Unity内同步显示修改效果<br>2. 一键切换生态地图，方便对照武器在各生态下效果。<br></p>
             </div>
-            <p class="beian-info">
-                <a href="https://beian.miit.gov.cn/" target="_blank">沪ICP备2024070004号</a>
-                <a href="https://beian.mps.gov.cn/#/query/webSearch?code=31011002006540" rel="noreferrer" target="_blank">
-                    <img src="https://oss.rebix.cn/img/police-icon.png" alt="Police Icon" class="beian-icon">沪公网安备31011002006540
-                </a>
-            </p>
-        </footer>
-    </body>
+        </div>
+    </section>
+
+    <!-- 图片预览遮罩层 -->
+    <div id="image-preview" style="display: none;">
+        <div id="preview-container">
+            <img id="preview-image" src="" alt="Image Preview">
+            <div id="left-arrow" class="arrow">&lt;</div>
+            <div id="right-arrow" class="arrow">&gt;</div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 傅宇帆</p>
+            <a href="mailto:irebix@qq.com">irebix@qq.com</a>
+        </div>
+        <p class="beian-info">
+            <a href="https://beian.miit.gov.cn/" target="_blank">沪ICP备2024070004号</a>
+            <a href="https://beian.mps.gov.cn/#/query/webSearch?code=31011002006540" rel="noreferrer" target="_blank">
+                <img src="https://oss.rebix.cn/img/police-icon.png" alt="Police Icon"
+                    class="beian-icon">沪公网安备31011002006540
+            </a>
+        </p>
+    </footer>
+</body>
 <script>
     document.querySelectorAll('.img-gallery img:not(.no-preview)').forEach((img, index, array) => {
-    img.addEventListener('click', () => {
-        document.getElementById('preview-image').src = img.src;
-        document.getElementById('image-preview').style.display = 'flex';
-    });
+        img.addEventListener('click', () => {
+            document.getElementById('preview-image').src = img.src;
+            document.getElementById('image-preview').style.display = 'flex';
+        });
     });
 
     document.getElementById('left-arrow').addEventListener('click', () => {
@@ -179,7 +196,7 @@
     });
     // 处理所有带有 'scroll-link' 类的链接的点击事件
     document.querySelectorAll('.scroll-link').forEach(link => {
-        link.addEventListener('click', function(event) {
+        link.addEventListener('click', function (event) {
             event.preventDefault(); // 阻止链接默认行为
             const targetId = link.getAttribute('data-target');
             const targetElement = document.getElementById(targetId);
@@ -191,7 +208,7 @@
     });
 
     // 处理 'down-arrow' 的点击事件，滚动到页面的第一个 section 元素
-    document.getElementById('down-arrow').addEventListener('click', function() {
+    document.getElementById('down-arrow').addEventListener('click', function () {
         const firstSection = document.querySelector('section'); // 获取页面中的第一个section元素
         if (firstSection) {
             firstSection.scrollIntoView({ behavior: 'smooth' });
@@ -199,7 +216,7 @@
     });
 
     // 刷新页面的事件处理器
-    document.getElementById('refresh-page').addEventListener('click', function(event) {
+    document.getElementById('refresh-page').addEventListener('click', function (event) {
         event.preventDefault(); // 阻止链接默认行为
         window.location.reload(); // 刷新页面
     });
@@ -236,7 +253,7 @@
 
     // 处理所有带有 'scroll-link' 类的链接的点击事件
     document.querySelectorAll('.scroll-link').forEach(link => {
-        link.addEventListener('click', function(event) {
+        link.addEventListener('click', function (event) {
             event.preventDefault(); // 阻止链接默认行为
             const targetId = link.getAttribute('data-target');
             const targetElement = document.getElementById(targetId);
@@ -248,7 +265,7 @@
     });
 
     // 处理 'down-arrow' 的点击事件，滚动到页面的第一个 section 元素
-    document.getElementById('down-arrow').addEventListener('click', function() {
+    document.getElementById('down-arrow').addEventListener('click', function () {
         const firstSection = document.querySelector('section'); // 获取页面中的第一个section元素
         if (firstSection) {
             firstSection.scrollIntoView({ behavior: 'smooth' });
@@ -256,7 +273,7 @@
     });
 
     // 刷新页面的事件处理器
-    document.getElementById('refresh-page').addEventListener('click', function(event) {
+    document.getElementById('refresh-page').addEventListener('click', function (event) {
         event.preventDefault(); // 阻止链接默认行为
         window.location.reload(); // 刷新页面
     });
@@ -300,7 +317,7 @@
         window.addEventListener('resize', setHoverImgSize);
     });
     //自动播放视频
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const video = document.getElementById('tool-demo-video');
 
         const observer = new IntersectionObserver((entries) => {
@@ -317,7 +334,7 @@
 
         observer.observe(video);
     });
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const projectRows = document.querySelectorAll('.project-row');
 
@@ -399,7 +416,7 @@
         }
     });
     //网页动效
-    (function() {
+    (function () {
         const animationObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -425,7 +442,7 @@
 
         function initializeAnimations() {
             // 其他元素按顺序出现
-            addAnimation('h1', 'fade-in-up-center',100);
+            addAnimation('h1', 'fade-in-up-center', 100);
             addAnimation('#tagline', 'fade-in-up-center', 400);
             //addAnimation('.project-description', 'fade-in-up', 500);
 
@@ -468,6 +485,6 @@
         }
     })();
 
-</script>      
-</html>
+</script>
 
+</html>
