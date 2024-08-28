@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱发电</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #content {
+            padding: 20px;
+            text-align: center;
+            font-size: 48px; /* 增大文字大小 */
+            color: #333;
+        }
+        #subtext {
+            color: #929292; /* 改变文字颜色 */
+            font-size: 30px; /* 缩小字号 */
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        img {
+            width: 25%; /* 默认宽度 */
+            height: auto;
+        }
+        @media (max-aspect-ratio: 1/1) {
+            img {
+                width: 75%; /* 宽高比为1:1时增大图片宽度 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="content">加载中...</div>
+    <div id="subtext"></div>
+    <img src="/img/ele.jpg" alt="电量图片">
+
+    <script>
+        // API URL
+        const apiUrl = 'https://rebix.cn/api/ele-logs'; // 替换为你的API URL
+
+        // 获取数据并显示在页面上
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const contentDiv = document.getElementById('content');
+                const subtextDiv = document.getElementById('subtext');
+                if (data && data.data) {
+                    // 提取返回内容中的电量数值
+                    const logMessage = data.data[0];
+                    const match = logMessage.match(/当前电量剩余\s+(\d+(\.\d+)?)度/);
+                    if (match) {
+                        const number = match[1];
+                        contentDiv.innerHTML = `剩余电量 ${number}`;
+                        subtextDiv.innerHTML = `用，都可以用`;
+                    } else {
+                        contentDiv.textContent = '未找到电量信息';
+                        subtextDiv.textContent = '';
+                    }
+                } else {
+                    contentDiv.textContent = '未找到内容';
+                    subtextDiv.textContent = '';
+                }
+            })
+            .catch(error => {
+                console.error('请求失败:', error);
+                document.getElementById('content').textContent = '加载失败';
+                document.getElementById('subtext').textContent = '';
+            });
+    </script>
+</body>
+</html>
