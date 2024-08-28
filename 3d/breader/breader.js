@@ -7,7 +7,7 @@ window.addEventListener('load', e => {
     createApp({
         containerId: 'v3d-container',
         fsButtonId: 'fullscreen-button',
-        sceneURL: params.load || '/3d/breader/breader.gltf',
+        sceneURL: params.load || 'https://oss.rebix.cn/3d/breader/breader.gltf',
         logicURL: params.logic || 'visual_logic.js',
     });
 });

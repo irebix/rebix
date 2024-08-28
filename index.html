@@ -97,7 +97,11 @@
             <a class="four-per-row"><img src="https://oss.rebix.cn/img/m1.jpg" alt="New Concept Art 2" loading="lazy" ></a>
             <a class="four-per-row"><img src="https://oss.rebix.cn/img/m2.jpg" alt="New Concept Art 3" loading="lazy" ></a>
             <a class="four-per-row"><img src="https://oss.rebix.cn/img/m3.jpg" alt="New Concept Art 4" loading="lazy" ></a>
-            <a class="four-per-row"><img src="https://oss.rebix.cn/img/muff1.jpg" alt="New Concept Art 1" loading="lazy" ></a>
+                    <!-- 使用 iframe 嵌入 noob.html -->
+            <div a class="four-per-row marmoset-container">
+                <iframe  src="/3d/breader/breader.html" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <!-- <a class="four-per-row"><img src="/img/muff1.jpg" alt="New Concept Art 1" loading="lazy" ></a> -->
         </div>
     </section>
 
@@ -459,7 +463,13 @@
                     animationObserver.observe(img);
                 });
             });
-
+            
+            // 添加对 marmoset-container 的处理
+            document.querySelectorAll('.marmoset-container').forEach((container, index) => {
+                container.classList.add('fade-in-up');
+                container.dataset.delay = 100 + 6 * 100;
+                animationObserver.observe(container);
+            });
         }
 
         // 初始化动画
