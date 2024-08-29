@@ -62,17 +62,6 @@ async function createApp({containerId, fsButtonId = null, sceneURL, logicURL = '
 
 
 function createPreloader(containerId, initOptions, PE) {
-    const preloader = initOptions.useCustomPreloader
-            ? createCustomPreloader(initOptions.preloaderProgressCb,
-            initOptions.preloaderEndCb)
-            : new v3d.SimplePreloader({ container: containerId });
-
-    if (PE) puzzlesEditorPreparePreloader(preloader, PE);
-
-    return preloader;
-}
-
-function createPreloader(containerId, initOptions, PE) {
     const customLoading = document.getElementById('custom-loading');
     const loadingBar = document.getElementById('loading-bar');
 
