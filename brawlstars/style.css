@@ -11,15 +11,6 @@ html, body {
     }
 }
 
-.filter{
-    /* filter: blur(50px); */
-    overflow: hidden;
-    border-radius: 20px;
-}
-.filter>img{
-    filter: blur(50px);
-}
-
 body {
     font-family: 'Noto Sans SC';
     display: flex;
