@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>SS Spine坐标对齐工具</title>
+    <style>
+        :root {
+            /* 颜色变量 */
+            --primary-color: #1890ff;
+            --primary-hover: #40a9ff;
+            --bg-color: #f0f2f5;
+            --overlay-bg: rgba(24, 144, 255, 0.4);
+            --corner-color: rgba(24, 144, 255, 0.4);
+            
+            /* 尺寸变量 */
+            --corner-size: 12vmin;    /* 四角框尺寸 */
+            --corner-border: 1.2vmin;  /* 边框粗细 */
+            --corner-margin: 6vmin;    /* 边距 */
+            --text-size: 6vmin;        /* 文字大小 */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 28rem;
+            margin: auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.25rem;
+            font-weight: bold;
+            color: #333;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+
+        .upload-button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: white;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 1rem 0;
+        }
+
+        .upload-button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .drag-hint {
+            color: #666;
+            font-size: 1.125rem;
+            margin: 1rem 0;
+        }
+
+        /* 拖拽遮罩层 */
+        .drag-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--overlay-bg);
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        .drag-overlay.active {
+            display: flex;
+        }
+
+        .drag-message {
+            color: white;
+            font-size: var(--text-size);
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 四角定位框 */
+        .corner {
+            position: fixed;
+            width: var(--corner-size);
+            height: var(--corner-size);
+            border: var(--corner-border) solid var(--corner-color);
+            display: none;
+        }
+
+        .drag-overlay.active .corner {
+            display: block;
+        }
+
+        .corner-tl {
+            top: var(--corner-margin);
+            left: var(--corner-margin);
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-tr {
+            top: var(--corner-margin);
+            right: var(--corner-margin);
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bl {
+            bottom: var(--corner-margin);
+            left: var(--corner-margin);
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-br {
+            bottom: var(--corner-margin);
+            right: var(--corner-margin);
+            border-left: none;
+            border-top: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 拖拽遮罩 -->
+    <div class="drag-overlay">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+        <div class="drag-message">将文件拖拽至此处进行处理</div>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <h3 class="title">选择JSON文件<br>自动对齐坐标</h3>
+        
+        <input type="file" id="fileInput" accept=".json" class="hidden">
+        <button class="upload-button" onclick="document.getElementById('fileInput').click()">
+            选择文件
+        </button>
+
+        <div class="drag-hint">
+            <p>或者将文件拖放到此处</p>
+        </div>
+    </div>
+
+    <script>
+        // 工具函数
+        const utils = {
+            // 处理坐标偏移
+            offsetCoordinates(x, y, name) {
+                const isHeadPart = ['hair', 'eye', 'shy', 'mouth', 'ear']
+                    .some(keyword => name.toLowerCase().includes(keyword));
+                
+                return isHeadPart 
+                    ? { x: x - 445.618, y: y + 491.303 }
+                    : { x: x - 495.58, y: y + 2086.05 };
+            },
+
+            // 下载处理后的文件
+            downloadFile(content, originalName) {
+                const blob = new Blob([content], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                
+                link.href = url;
+                link.download = originalName.replace('.json', '_processed.json');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+        };
+
+        // 文件处理函数
+        function processFile(file) {
+            if (!file.name.toLowerCase().endsWith('.json')) {
+                alert('请选择JSON文件！');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = e => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (data.skins?.default) {
+                        Object.entries(data.skins.default).forEach(([slotName, slotData]) => {
+                            Object.values(slotData).forEach(attachment => {
+                                if ('x' in attachment && 'y' in attachment) {
+                                    const newCoords = utils.offsetCoordinates(
+                                        attachment.x,
+                                        attachment.y,
+                                        slotName
+                                    );
+                                    Object.assign(attachment, newCoords);
+                                }
+                            });
+                        });
+                    }
+                    
+                    utils.downloadFile(JSON.stringify(data, null, 2), file.name);
+                    alert('文件处理完成！');
+                } catch (error) {
+                    alert('处理文件时发生错误：' + error.message);
+                }
+            };
+            
+            reader.readAsText(file);
+        }
+
+        // 拖拽相关事件处理
+        const dragOverlay = document.querySelector('.drag-overlay');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+            document.body.addEventListener(event, e => {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        });
+
+        ['dragenter', 'dragover'].forEach(event => {
+            document.body.addEventListener(event, () => {
+                dragOverlay.classList.add('active');
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(event => {
+            document.body.addEventListener(event, () => {
+                dragOverlay.classList.remove('active');
+            });
+        });
+
+        // 文件选择和拖放处理
+        document.getElementById('fileInput').addEventListener('change', e => {
+            if (e.target.files[0]) processFile(e.target.files[0]);
+        });
+
+        document.body.addEventListener('drop', e => {
+            const file = e.dataTransfer.files[0];
+            if (file) processFile(file);
+        });
+    </script>
+</body>
+</html>
