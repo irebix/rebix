@@ -134,6 +134,45 @@
         .hidden {
             display: none;
         }
+
+        /* 通知组件样式 */
+        .notification-container {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .notification {
+            background-color: white;
+            border-left: 6px solid var(--primary-color);
+            border-radius: 6px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            padding: 24px 36px;
+            margin-bottom: 18px;
+            transform: translateX(120%);
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            min-width: 360px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-icon {
+            margin-right: 18px;
+            color: var(--primary-color);
+            font-size: 21px;
+        }
+
+        .notification-message {
+            color: #333;
+            font-size: 21px;
+            margin: 0;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -159,6 +198,9 @@
             <p>或者将文件拖放到此处</p>
         </div>
     </div>
+
+    <!-- 在body末尾添加通知容器 -->
+    <div class="notification-container"></div>
 
     <script>
         // 工具函数
@@ -248,10 +290,36 @@
             }
         };
 
+        // 添加通知功能
+        const notification = {
+            show(message, duration = 3000) {
+                const container = document.querySelector('.notification-container');
+                const notificationEl = document.createElement('div');
+                notificationEl.className = 'notification';
+                notificationEl.innerHTML = `
+                    <span class="notification-icon">✓</span>
+                    <p class="notification-message">${message}</p>
+                `;
+                
+                container.appendChild(notificationEl);
+                
+                // 触发重排以启动动画
+                notificationEl.offsetHeight;
+                notificationEl.classList.add('show');
+                
+                setTimeout(() => {
+                    notificationEl.classList.remove('show');
+                    setTimeout(() => {
+                        container.removeChild(notificationEl);
+                    }, 300);
+                }, duration);
+            }
+        };
+
         // 文件处理函数
         function processFile(file) {
             if (!file.name.toLowerCase().endsWith('.json')) {
-                alert('请选择JSON文件！');
+                notification.show('请选择JSON文件！');
                 return;
             }
 
@@ -280,9 +348,9 @@
                     }
                     
                     utils.downloadFile(JSON.stringify(data, null, 2), file.name);
-                    alert('文件处理完成！');
+                    notification.show('文件处理完成！');
                 } catch (error) {
-                    alert('处理文件时发生错误：' + error.message);
+                    notification.show('处理文件时发生错误：' + error.message);
                 }
             };
             
