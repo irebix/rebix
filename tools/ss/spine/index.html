@@ -203,19 +203,9 @@
     <div class="notification-container"></div>
 
     <script>
-        // 工具函数
+        // 处理逻辑
         const utils = {
-            // 处理坐标偏移
-            offsetCoordinates(x, y, name) {
-                const isHeadPart = ['hair', 'eye', 'shy', 'mouth', 'ear']
-                    .some(keyword => name.toLowerCase().includes(keyword));
-                
-                return isHeadPart 
-                    ? { x: x - 445.618, y: y + 491.303 }
-                    : { x: x - 495.58, y: y + 2086.05 };
-            },
-
-            // 下载处理后的文件
+            // 下载文件
             downloadFile(content, originalName) {
                 const blob = new Blob([content], { type: 'application/json' });
                 const url = URL.createObjectURL(blob);
@@ -227,66 +217,6 @@
                 link.click();
                 document.body.removeChild(link);
                 URL.revokeObjectURL(url);
-            },
-
-            // 添加新的合并插槽函数
-            mergeSlots(json) {
-                // 1. 找出所有需要合并的分类和它们对应的数字
-                const categoryMap = new Map(); // 用于存储分类及其对应的数字
-                json.slots.forEach(slot => {
-                    if (slot.name.includes('_')) {
-                        const parts = slot.name.split('_');
-                        const category = parts[0];
-                        // 查找数字部分
-                        const numberMatch = slot.name.match(/\d+/);
-                        if (numberMatch) {
-                            categoryMap.set(category, numberMatch[0]);
-                        }
-                    }
-                });
-
-                // 2. 处理每个分类
-                categoryMap.forEach((number, category) => {
-                    // 创建新的合并插槽，使用 A 版本作为默认 attachment
-                    const defaultAttachment = `${category}_A_${number}`;
-                    const newSlot = {
-                        name: category,
-                        bone: "root",
-                        attachment: defaultAttachment
-                    };
-
-                    // 找到要删除的插槽索引
-                    const slotsToRemove = [];
-                    json.slots.forEach((slot, index) => {
-                        if (slot.name.startsWith(category + '_')) {
-                            slotsToRemove.push(index);
-                        }
-                    });
-
-                    // 从后向前删除旧插槽
-                    slotsToRemove.reverse().forEach(index => {
-                        json.slots.splice(index, 1);
-                    });
-
-                    // 添加新的合并插槽
-                    json.slots.push(newSlot);
-
-                    // 处理 skins 部分
-                    if (json.skins?.default) {
-                        const defaultSkin = json.skins.default;
-                        defaultSkin[category] = {};
-
-                        // 合并所有相关附件
-                        Object.keys(defaultSkin).forEach(slotName => {
-                            if (slotName.startsWith(category + '_')) {
-                                Object.assign(defaultSkin[category], defaultSkin[slotName]);
-                                delete defaultSkin[slotName];
-                            }
-                        });
-                    }
-                });
-
-                return json;
             }
         };
 
@@ -316,45 +246,39 @@
             }
         };
 
-        // 文件处理函数
-        function processFile(file) {
+        // 文件处理函数 - 上传和接收结果
+        async function processFile(file) {
             if (!file.name.toLowerCase().endsWith('.json')) {
                 notification.show('请选择JSON文件！');
                 return;
             }
 
-            const reader = new FileReader();
-            reader.onload = e => {
-                try {
-                    let data = JSON.parse(e.target.result);
-                    
-                    // 先进行插槽合并
-                    data = utils.mergeSlots(data);
-                    
-                    // 只处理坐标偏移
-                    if (data.skins?.default) {
-                        Object.entries(data.skins.default).forEach(([slotName, slotData]) => {
-                            Object.entries(slotData).forEach(([attachmentName, attachment]) => {
-                                if ('x' in attachment && 'y' in attachment) {
-                                    const newCoords = utils.offsetCoordinates(
-                                        attachment.x,
-                                        attachment.y,
-                                        slotName
-                                    );
-                                    Object.assign(attachment, newCoords);
-                                }
-                            });
-                        });
-                    }
-                    
-                    utils.downloadFile(JSON.stringify(data, null, 2), file.name);
-                    notification.show('文件处理完成！');
-                } catch (error) {
-                    notification.show('处理文件时发生错误：' + error.message);
+            try {
+                const text = await file.text();
+                const jsonData = JSON.parse(text);
+                
+                const response = await fetch('/api/ss-spine', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('服务器处理失败');
                 }
-            };
-            
-            reader.readAsText(file);
+
+                const result = await response.json();
+                if (result.success) {
+                    utils.downloadFile(JSON.stringify(result.data, null, 2), file.name);
+                    notification.show('文件处理完成！');
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                notification.show('处理文件时发生错误：' + error.message);
+            }
         }
 
         // 拖拽相关事件处理
