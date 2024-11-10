@@ -185,6 +185,66 @@
                 link.click();
                 document.body.removeChild(link);
                 URL.revokeObjectURL(url);
+            },
+
+            // 添加新的合并插槽函数
+            mergeSlots(json) {
+                // 1. 找出所有需要合并的分类和它们对应的数字
+                const categoryMap = new Map(); // 用于存储分类及其对应的数字
+                json.slots.forEach(slot => {
+                    if (slot.name.includes('_')) {
+                        const parts = slot.name.split('_');
+                        const category = parts[0];
+                        // 查找数字部分
+                        const numberMatch = slot.name.match(/\d+/);
+                        if (numberMatch) {
+                            categoryMap.set(category, numberMatch[0]);
+                        }
+                    }
+                });
+
+                // 2. 处理每个分类
+                categoryMap.forEach((number, category) => {
+                    // 创建新的合并插槽，使用 A 版本作为默认 attachment
+                    const defaultAttachment = `${category}_A_${number}`;
+                    const newSlot = {
+                        name: category,
+                        bone: "root",
+                        attachment: defaultAttachment
+                    };
+
+                    // 找到要删除的插槽索引
+                    const slotsToRemove = [];
+                    json.slots.forEach((slot, index) => {
+                        if (slot.name.startsWith(category + '_')) {
+                            slotsToRemove.push(index);
+                        }
+                    });
+
+                    // 从后向前删除旧插槽
+                    slotsToRemove.reverse().forEach(index => {
+                        json.slots.splice(index, 1);
+                    });
+
+                    // 添加新的合并插槽
+                    json.slots.push(newSlot);
+
+                    // 处理 skins 部分
+                    if (json.skins?.default) {
+                        const defaultSkin = json.skins.default;
+                        defaultSkin[category] = {};
+
+                        // 合并所有相关附件
+                        Object.keys(defaultSkin).forEach(slotName => {
+                            if (slotName.startsWith(category + '_')) {
+                                Object.assign(defaultSkin[category], defaultSkin[slotName]);
+                                delete defaultSkin[slotName];
+                            }
+                        });
+                    }
+                });
+
+                return json;
             }
         };
 
@@ -198,11 +258,15 @@
             const reader = new FileReader();
             reader.onload = e => {
                 try {
-                    const data = JSON.parse(e.target.result);
+                    let data = JSON.parse(e.target.result);
                     
+                    // 先进行插槽合并
+                    data = utils.mergeSlots(data);
+                    
+                    // 只处理坐标偏移
                     if (data.skins?.default) {
                         Object.entries(data.skins.default).forEach(([slotName, slotData]) => {
-                            Object.values(slotData).forEach(attachment => {
+                            Object.entries(slotData).forEach(([attachmentName, attachment]) => {
                                 if ('x' in attachment && 'y' in attachment) {
                                     const newCoords = utils.offsetCoordinates(
                                         attachment.x,
